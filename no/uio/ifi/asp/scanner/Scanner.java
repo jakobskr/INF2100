@@ -190,6 +190,14 @@ public class Scanner {
         continue;
       }
 
+      else if (isDigit(chars[i])) {
+        String str = "";
+
+        while(isDigit(chars[i]) && i < chars.length) {
+          str = str + chars[i];
+        }
+      }
+
       else if (chars[i] == ',') {
          curLineTokens.add(new Token(commaToken, linNum));
          i++;

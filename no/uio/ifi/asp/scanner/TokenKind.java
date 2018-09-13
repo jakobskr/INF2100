@@ -100,7 +100,7 @@ public enum TokenKind {
     String image;
 
     TokenKind(String s) {
-	image = s;
+	     image = s;
     }
 
     public String toString() {
