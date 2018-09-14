@@ -78,10 +78,6 @@ public class Scanner {
           curLineTokens.add(new Token(dedentToken));
         }
 
-        for (int i :stack ) {
-          System.out.println(i);
-        }
-
         curLineTokens.add(new Token(eofToken));
         for (Token t: curLineTokens)
         Main.log.noteToken(t);
@@ -503,29 +499,17 @@ public class Scanner {
   	else{
   		while (dent < stack.getLast() ) {
   			dedentct++;
-        System.out.println(dedentct);
-
   			stack.removeLast();
-        System.out.println("slett--");
   		}
   		if (dent == stack.getLast() ) {
   			for(int i = 0; i < dedentct; i++ ) {
-          System.out.println(dedentct);
   				curLineTokens.add ( new Token( dedentToken,  lineNum));
-          System.out.println("dedent--");
   			}
   		}
   		else{
-        System.out.println("else--");
   			scannerError ( "indent depth does not match any start of block" );
   			return;
   		}
   	}
-
-  	//expandLeadingTabs
-  	//n = findIndent
-  	//if n>indents.top make indentToken
-  	//if n<indents.top
-
   }
 }
