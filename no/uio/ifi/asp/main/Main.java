@@ -16,7 +16,7 @@ public class Main {
 	boolean testExpr = false, testParser = false, testScanner = false,
 	    logE = false, logP = false, logS = false, logY = false;
 
-	System.out.println("This is the INF2100 Asp interpreter (" +
+      System.out.println("This is the INF2100 Asp interpreter (" +
 			   version + ")");
 
 	for (int i = 0;  i < arg.length;  i++) {

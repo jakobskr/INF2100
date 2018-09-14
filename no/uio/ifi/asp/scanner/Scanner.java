@@ -69,7 +69,7 @@ public class Scanner {
     String line = null;
     try {
       line = sourceFile.readLine();
-      System.out.println(curLineNum());
+      //System.out.println(curLineNum());
       if (line == null) {
         sourceFile.close();
         curLineTokens.add(new Token(eofToken, curLineNum()));
@@ -123,50 +123,40 @@ public class Scanner {
 
   private void genTokens(String line, int linNum) {
     char[] chars = line.toCharArray();
-    String test = "";
     int i = 0;
     if (chars[0] == '#') {
       return;
     }
     System.out.println(line);
     while (i < chars.length) {
-      System.out.println(i + " "  + chars.length + chars[i]);
+      Token tok = null;
+      //System.out.println(i + " "  + chars.length + chars[i]);
 
 
       if (isLetterAZ(chars[i])) {
+        String str = "";
         while(i < chars.length && isLetterAZ(chars[i]) ) {
-          test = test + chars[i];
+          str = str + chars[i];
           i++;
         }
-        Token test2 = new Token(nameToken, linNum);
-        test2.name = test;
-        curLineTokens.add(test2);
-        test = "";
+        tok = getKeyword(str, linNum);
+        curLineTokens.add(tok);
         continue;
-      }
-
-      else if (chars[i] == '=') {
-        if (chars[i + 1] == '=') {
-          //ADD case here
-        }
-
-        else {
-          System.out.println("skjer");
-          curLineTokens.add(new Token (equalToken,linNum));
-          i++;
-          continue;
-        }
       }
 
       else if(chars[i] == '\'') {
         String str = "";
         i++;
         while(chars[i] != '\'') {
-          System.out.println(chars[i]);
           str = str + chars[i];
           i++;
+
+          if(i == chars.length ) {
+            scannerError("Unexpected end of line, expected a \'");
+            break;
+          }
         }
-        Token tok = new Token (stringToken, linNum);
+        tok = new Token (stringToken, linNum);
         tok.stringLit = str;
         curLineTokens.add(tok);
         i++;
@@ -174,16 +164,19 @@ public class Scanner {
       }
 
       else if(chars[i] == '\"') {
-        System.out.println("fuck u xd");
         String str = "";
         i++;
         while(chars[i] != '\"') {
-          System.out.println(chars[i]);
           str = str + chars[i];
           i++;
+
+          if(i == chars.length ) {
+            scannerError("Unexpected end of line, expected a \"");
+            break;
+          }
         }
 
-        Token tok = new Token (stringToken, linNum);
+        tok = new Token (stringToken, linNum);
         tok.stringLit = str;
         curLineTokens.add(tok);
         i++;
@@ -192,10 +185,35 @@ public class Scanner {
 
       else if (isDigit(chars[i])) {
         String str = "";
+        Boolean isFloat = false;
 
-        while(isDigit(chars[i]) && i < chars.length) {
+        while(chars.length > i && isDigit(chars[i])) {
           str = str + chars[i];
+          i++;
         }
+
+        if (i < chars.length && chars[i] == '.') {
+          str = str + chars[i];
+          isFloat = true;
+          i++;
+
+          while(chars.length > i && isDigit(chars[i])) {
+            str = str + chars[i];
+            i++;
+          }
+        }
+
+        if (isFloat) {
+          tok = new Token (floatToken, linNum);
+          tok.floatLit = Double.parseDouble(str);
+        }
+
+        else {
+          tok = new Token (integerToken, linNum);
+          tok.integerLit = Integer.parseInt(str);
+        }
+        curLineTokens.add(tok);
+        continue;
       }
 
       else if (chars[i] == ',') {
@@ -217,7 +235,7 @@ public class Scanner {
       }
 
       else if (chars[i] == '[') {
-         curLineTokens.add(new Token(rightBracketToken, linNum));
+         curLineTokens.add(new Token(leftBracketToken, linNum));
          i++;
          continue;
       }
@@ -228,9 +246,121 @@ public class Scanner {
          continue;
       }
 
-      else {
+      else if (chars[i] == '{') {
+         curLineTokens.add(new Token(leftBraceToken, linNum));
+         i++;
+         continue;
+      }
+
+      else if (chars[i] == '}') {
+         curLineTokens.add(new Token(rightBraceToken, linNum));
+         i++;
+         continue;
+      }
+
+      else if (chars[i] == '=') {
+      	if (chars[i+1] == '='){
+      		curLineTokens.add(new Token(doubleEqualToken, linNum));
+      		i++;
+      	}
+      	else{
+      		curLineTokens.add(new Token(equalToken, linNum));
+      	}
+      	i++;
+      	continue;
+      }
+
+      else if (chars[i] == '<') {
+      	if (chars[i+1] == '='){
+      		curLineTokens.add(new Token(lessEqualToken, linNum));
+      		i++;
+      	}
+      	else{
+      		curLineTokens.add(new Token(lessToken, linNum));
+      	}
+      	i++;
+      	continue;
+      }
+
+      else if (chars[i] == '>') {
+      	if (chars[i+1] == '='){
+      		curLineTokens.add(new Token(greaterEqualToken, linNum));
+      		i++;
+      	}
+      	else{
+      		curLineTokens.add(new Token(greaterToken, linNum));
+      	}
+      	i++;
+      	continue;
+      }
+
+      else if (chars[i] == '!') {
+      	if (chars[i+1] == '='){
+      		curLineTokens.add(new Token(notEqualToken, linNum));
+      		i++;
+      	}
+      	else{
+      		curLineTokens.add(new Token(notToken, linNum));
+      	}
+      	i++;
+      	continue;
+      }
+
+      else if (chars[i] == '/') {
+      	if (chars[i+1] == '/'){
+      		curLineTokens.add(new Token(slashToken, linNum));
+      		i++;
+      	}
+      	else{
+      		curLineTokens.add(new Token(doubleSlashToken, linNum));
+      	}
+      	i++;
+      	continue;
+      }
+
+      else if (chars[i] == '*') {
+      	curLineTokens.add(new Token(astToken, linNum));
+      	i++;
+      	continue;
+      }
+
+      else if (chars[i] == '-') {
+      	curLineTokens.add(new Token(minusToken, linNum));
+      	i++;
+      	continue;
+      }
+
+      else if (chars[i] == '%') {
+      	curLineTokens.add(new Token(percentToken, linNum));
+      	i++;
+      	continue;
+      }
+
+      else if (chars[i] == '+') {
+      	curLineTokens.add(new Token(plusToken, linNum));
+      	i++;
+      	continue;
+      }
+
+      else if (chars[i] == ':') {
+      	curLineTokens.add(new Token(colonToken, linNum));
+      	i++;
+      	continue;
+      }
+
+      else if (chars[i] == ',') {
+      	curLineTokens.add(new Token(commaToken, linNum));
+      	i++;
+      	continue;
+      }
+
+      else if (chars[i] == ' ') {
         i++;
         continue;
+      }
+
+      else {
+        scannerError("Illegal");
       }
     }
   }
@@ -270,5 +400,60 @@ public class Scanner {
     TokenKind k = curToken().kind;
     //-- Must be changed in part 2:
     return false;
+  }
+
+  private Token getKeyword(String word, int linNum){
+    Token tok = null;
+
+    if( word.equals("and") ){
+  		tok = new Token(andToken, linNum);
+  	}
+  	else if( word.equals("def") ){
+  		tok = new Token(defToken, linNum);
+  	}
+  	else if( word.equals("elif") ){
+  		tok = new Token(elifToken, linNum);
+  	}
+  	else if( word.equals("else") ){
+  		tok = new Token(elseToken, linNum);
+  	}
+  	else if( word.equals("False") ){
+  		tok = new Token(falseToken, linNum);
+  	}
+  	else if( word.equals("for") ){
+  		tok = new Token(forToken, linNum);
+  	}
+  	else if( word.equals("if") ){
+  		tok = new Token(ifToken, linNum);
+  	}
+  	else if( word.equals("in") ){
+  		tok = new Token(inToken, linNum);
+  	}
+  	else if( word.equals("None") ){
+  		tok = new Token(noneToken, linNum);
+  	}
+  	else if( word.equals("not") ){
+  		tok = new Token(notToken, linNum);
+  	}
+  	else if( word.equals("or") ){
+  		tok = new Token(orToken, linNum);
+  	}
+  	else if( word.equals("pass") ){
+  		tok = new Token(passToken, linNum);
+  	}
+  	else if( word.equals("return") ){
+  		tok = new Token(returnToken, linNum);
+  	}
+  	else if( word.equals("true") ){
+  		tok = new Token(trueToken, linNum);
+  	}
+  	else if( word.equals("while") ){
+  		tok = new Token(whileToken, linNum);
+  	}
+  	else{
+  		tok = new Token(nameToken, linNum);
+  		tok.name=word;
+  	}
+  	return tok;
   }
 }
