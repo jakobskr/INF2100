@@ -13,11 +13,12 @@ public class Scanner {
   private int indents[] = new int[100];
   private int numIndents = 0;
   private final int tabDist = 4;
-
+  private LinkedList<Integer> stack = new LinkedList<Integer>();
 
   public Scanner(String fileName) {
     curFileName = fileName;
     indents[0] = 0;  numIndents = 1;
+    stack.addLast(0);
 
     try {
       sourceFile = new LineNumberReader(
@@ -72,7 +73,18 @@ public class Scanner {
       //System.out.println(curLineNum());
       if (line == null) {
         sourceFile.close();
-        curLineTokens.add(new Token(eofToken, curLineNum()));
+
+        for (int i = 0; i < stack.size() - 1; i++ ) {
+          curLineTokens.add(new Token(dedentToken));
+        }
+
+        for (int i :stack ) {
+          System.out.println(i);
+        }
+
+        curLineTokens.add(new Token(eofToken));
+        for (Token t: curLineTokens)
+        Main.log.noteToken(t);
         sourceFile = null;
         return;
       } else {
@@ -83,7 +95,28 @@ public class Scanner {
       scannerError("Unspecified I/O error!");
     }
 
+    if (line.length() == 0) {
+      return;
+    }
+
     //-- Must be changed in part 1:
+    line = expandLeadingTabs(line);
+    //System.out.println("indent : " + indent);
+
+    for (char c: line.toCharArray()) {
+      if (c == ' ') {
+        continue;
+      }
+
+      else if(c == '#') {
+        return;
+      }
+
+      else break;
+    }
+
+
+    indentDo(line, curLineNum());
     genTokens(line, curLineNum());
     // Terminate line:
     curLineTokens.add(new Token(newLineToken,curLineNum()));
@@ -121,7 +154,7 @@ public class Scanner {
     return newS;
   }
 
-  private void genTokens(String line, int linNum) {
+  private void genTokens(String line, int  lineNum) {
     char[] chars = line.toCharArray();
     int i = 0;
     if (chars[0] == '#') {
@@ -139,7 +172,7 @@ public class Scanner {
           str = str + chars[i];
           i++;
         }
-        tok = getKeyword(str, linNum);
+        tok = getKeyword(str,  lineNum);
         curLineTokens.add(tok);
         continue;
       }
@@ -156,7 +189,7 @@ public class Scanner {
             break;
           }
         }
-        tok = new Token (stringToken, linNum);
+        tok = new Token (stringToken,  lineNum);
         tok.stringLit = str;
         curLineTokens.add(tok);
         i++;
@@ -176,7 +209,7 @@ public class Scanner {
           }
         }
 
-        tok = new Token (stringToken, linNum);
+        tok = new Token (stringToken,  lineNum);
         tok.stringLit = str;
         curLineTokens.add(tok);
         i++;
@@ -204,12 +237,12 @@ public class Scanner {
         }
 
         if (isFloat) {
-          tok = new Token (floatToken, linNum);
+          tok = new Token (floatToken,  lineNum);
           tok.floatLit = Double.parseDouble(str);
         }
 
         else {
-          tok = new Token (integerToken, linNum);
+          tok = new Token (integerToken,  lineNum);
           tok.integerLit = Integer.parseInt(str);
         }
         curLineTokens.add(tok);
@@ -217,54 +250,54 @@ public class Scanner {
       }
 
       else if (chars[i] == ',') {
-         curLineTokens.add(new Token(commaToken, linNum));
+         curLineTokens.add(new Token(commaToken,  lineNum));
          i++;
          continue;
       }
 
       else if (chars[i] == '(') {
-         curLineTokens.add(new Token(leftParToken, linNum));
+         curLineTokens.add(new Token(leftParToken,  lineNum));
          i++;
          continue;
       }
 
       else if (chars[i] == ')') {
-         curLineTokens.add(new Token(rightParToken, linNum));
+         curLineTokens.add(new Token(rightParToken,  lineNum));
          i++;
          continue;
       }
 
       else if (chars[i] == '[') {
-         curLineTokens.add(new Token(leftBracketToken, linNum));
+         curLineTokens.add(new Token(leftBracketToken,  lineNum));
          i++;
          continue;
       }
 
       else if (chars[i] == ']') {
-         curLineTokens.add(new Token(rightBracketToken, linNum));
+         curLineTokens.add(new Token(rightBracketToken,  lineNum));
          i++;
          continue;
       }
 
       else if (chars[i] == '{') {
-         curLineTokens.add(new Token(leftBraceToken, linNum));
+         curLineTokens.add(new Token(leftBraceToken,  lineNum));
          i++;
          continue;
       }
 
       else if (chars[i] == '}') {
-         curLineTokens.add(new Token(rightBraceToken, linNum));
+         curLineTokens.add(new Token(rightBraceToken,  lineNum));
          i++;
          continue;
       }
 
       else if (chars[i] == '=') {
       	if (chars[i+1] == '='){
-      		curLineTokens.add(new Token(doubleEqualToken, linNum));
+      		curLineTokens.add(new Token(doubleEqualToken,  lineNum));
       		i++;
       	}
       	else{
-      		curLineTokens.add(new Token(equalToken, linNum));
+      		curLineTokens.add(new Token(equalToken,  lineNum));
       	}
       	i++;
       	continue;
@@ -272,11 +305,11 @@ public class Scanner {
 
       else if (chars[i] == '<') {
       	if (chars[i+1] == '='){
-      		curLineTokens.add(new Token(lessEqualToken, linNum));
+      		curLineTokens.add(new Token(lessEqualToken,  lineNum));
       		i++;
       	}
       	else{
-      		curLineTokens.add(new Token(lessToken, linNum));
+      		curLineTokens.add(new Token(lessToken,  lineNum));
       	}
       	i++;
       	continue;
@@ -284,11 +317,11 @@ public class Scanner {
 
       else if (chars[i] == '>') {
       	if (chars[i+1] == '='){
-      		curLineTokens.add(new Token(greaterEqualToken, linNum));
+      		curLineTokens.add(new Token(greaterEqualToken,  lineNum));
       		i++;
       	}
       	else{
-      		curLineTokens.add(new Token(greaterToken, linNum));
+      		curLineTokens.add(new Token(greaterToken,  lineNum));
       	}
       	i++;
       	continue;
@@ -296,11 +329,11 @@ public class Scanner {
 
       else if (chars[i] == '!') {
       	if (chars[i+1] == '='){
-      		curLineTokens.add(new Token(notEqualToken, linNum));
+      		curLineTokens.add(new Token(notEqualToken,  lineNum));
       		i++;
       	}
       	else{
-      		curLineTokens.add(new Token(notToken, linNum));
+      		curLineTokens.add(new Token(notToken,  lineNum));
       	}
       	i++;
       	continue;
@@ -308,48 +341,48 @@ public class Scanner {
 
       else if (chars[i] == '/') {
       	if (chars[i+1] == '/'){
-      		curLineTokens.add(new Token(slashToken, linNum));
+      		curLineTokens.add(new Token(slashToken,  lineNum));
       		i++;
       	}
       	else{
-      		curLineTokens.add(new Token(doubleSlashToken, linNum));
+      		curLineTokens.add(new Token(doubleSlashToken,  lineNum));
       	}
       	i++;
       	continue;
       }
 
       else if (chars[i] == '*') {
-      	curLineTokens.add(new Token(astToken, linNum));
+      	curLineTokens.add(new Token(astToken,  lineNum));
       	i++;
       	continue;
       }
 
       else if (chars[i] == '-') {
-      	curLineTokens.add(new Token(minusToken, linNum));
+      	curLineTokens.add(new Token(minusToken,  lineNum));
       	i++;
       	continue;
       }
 
       else if (chars[i] == '%') {
-      	curLineTokens.add(new Token(percentToken, linNum));
+      	curLineTokens.add(new Token(percentToken,  lineNum));
       	i++;
       	continue;
       }
 
       else if (chars[i] == '+') {
-      	curLineTokens.add(new Token(plusToken, linNum));
+      	curLineTokens.add(new Token(plusToken,  lineNum));
       	i++;
       	continue;
       }
 
       else if (chars[i] == ':') {
-      	curLineTokens.add(new Token(colonToken, linNum));
+      	curLineTokens.add(new Token(colonToken,  lineNum));
       	i++;
       	continue;
       }
 
       else if (chars[i] == ',') {
-      	curLineTokens.add(new Token(commaToken, linNum));
+      	curLineTokens.add(new Token(commaToken,  lineNum));
       	i++;
       	continue;
       }
@@ -402,58 +435,97 @@ public class Scanner {
     return false;
   }
 
-  private Token getKeyword(String word, int linNum){
+  private Token getKeyword(String word, int  lineNum){
     Token tok = null;
 
     if( word.equals("and") ){
-  		tok = new Token(andToken, linNum);
+  		tok = new Token(andToken,  lineNum);
   	}
   	else if( word.equals("def") ){
-  		tok = new Token(defToken, linNum);
+  		tok = new Token(defToken,  lineNum);
   	}
   	else if( word.equals("elif") ){
-  		tok = new Token(elifToken, linNum);
+  		tok = new Token(elifToken,  lineNum);
   	}
   	else if( word.equals("else") ){
-  		tok = new Token(elseToken, linNum);
+  		tok = new Token(elseToken,  lineNum);
   	}
   	else if( word.equals("False") ){
-  		tok = new Token(falseToken, linNum);
+  		tok = new Token(falseToken,  lineNum);
   	}
   	else if( word.equals("for") ){
-  		tok = new Token(forToken, linNum);
+  		tok = new Token(forToken,  lineNum);
   	}
   	else if( word.equals("if") ){
-  		tok = new Token(ifToken, linNum);
+  		tok = new Token(ifToken,  lineNum);
   	}
   	else if( word.equals("in") ){
-  		tok = new Token(inToken, linNum);
+  		tok = new Token(inToken,  lineNum);
   	}
   	else if( word.equals("None") ){
-  		tok = new Token(noneToken, linNum);
+  		tok = new Token(noneToken,  lineNum);
   	}
   	else if( word.equals("not") ){
-  		tok = new Token(notToken, linNum);
+  		tok = new Token(notToken,  lineNum);
   	}
   	else if( word.equals("or") ){
-  		tok = new Token(orToken, linNum);
+  		tok = new Token(orToken,  lineNum);
   	}
   	else if( word.equals("pass") ){
-  		tok = new Token(passToken, linNum);
+  		tok = new Token(passToken,  lineNum);
   	}
   	else if( word.equals("return") ){
-  		tok = new Token(returnToken, linNum);
+  		tok = new Token(returnToken,  lineNum);
   	}
   	else if( word.equals("true") ){
-  		tok = new Token(trueToken, linNum);
+  		tok = new Token(trueToken,  lineNum);
   	}
   	else if( word.equals("while") ){
-  		tok = new Token(whileToken, linNum);
+  		tok = new Token(whileToken,  lineNum);
   	}
   	else{
-  		tok = new Token(nameToken, linNum);
+  		tok = new Token(nameToken,  lineNum);
   		tok.name=word;
   	}
   	return tok;
+  }
+
+  private void indentDo(String instr, int  lineNum){
+  	int dent;
+  	int dedentct = 0;
+  	// if is isEmpty ignore
+
+  	dent = findIndent(instr);
+  	if (dent > stack.getLast()) {
+  		curLineTokens.add( new Token( indentToken,  lineNum));
+      stack.addLast(dent);
+  	}
+  	else{
+  		while (dent < stack.getLast() ) {
+  			dedentct++;
+        System.out.println(dedentct);
+
+  			stack.removeLast();
+        System.out.println("slett--");
+  		}
+  		if (dent == stack.getLast() ) {
+  			for(int i = 0; i < dedentct; i++ ) {
+          System.out.println(dedentct);
+  				curLineTokens.add ( new Token( dedentToken,  lineNum));
+          System.out.println("dedent--");
+  			}
+  		}
+  		else{
+        System.out.println("else--");
+  			scannerError ( "indent depth does not match any start of block" );
+  			return;
+  		}
+  	}
+
+  	//expandLeadingTabs
+  	//n = findIndent
+  	//if n>indents.top make indentToken
+  	//if n<indents.top
+
   }
 }
