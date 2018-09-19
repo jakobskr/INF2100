@@ -2,6 +2,14 @@ package no.uio.ifi.asp.scanner;
 
 import no.uio.ifi.asp.main.*;
 
+
+/**
+ * An enum of the valid and also the invalid tokens in asp.
+ * the tokens marked with "// not used in asp" are not valid asp Tokens,
+ * but the scanner should still read them and generate the corresponding tokens.
+ *
+ * @author
+ */
 public enum TokenKind {
     // Names and literals:
     nameToken("name"),

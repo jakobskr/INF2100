@@ -6,6 +6,14 @@ import java.util.*;
 import no.uio.ifi.asp.main.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+/**
+ * Reads a line from an .asp sourcefile and generates a list of asp tokens
+ *
+ *
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 public class Scanner {
   private LineNumberReader sourceFile = null;
   private String curFileName;
@@ -153,14 +161,15 @@ public class Scanner {
   private void genTokens(String line, int  lineNum) {
     char[] chars = line.toCharArray();
     int i = 0;
-    if (chars[0] == '#') {
-      return;
-    }
+
     System.out.println(line);
     while (i < chars.length) {
       Token tok = null;
       //System.out.println(i + " "  + chars.length + chars[i]);
 
+      if (chars[i] == '#') {
+        return;
+      }
 
       if (isLetterAZ(chars[i])) {
         String str = "";
@@ -222,6 +231,9 @@ public class Scanner {
         }
 
         if (i < chars.length && chars[i] == '.') {
+          if ((i < chars.length) || !isDigit(chars[i + 1])) {
+            scannerError("Illegal float literal at line " + lineNum);
+          }
           str = str + chars[i];
           isFloat = true;
           i++;
@@ -329,10 +341,9 @@ public class Scanner {
       		i++;
       	}
       	else{
-      		curLineTokens.add(new Token(notToken,  lineNum));
+      		scannerError("Unexpected symbol \"" + chars[i] + "\" at line " + lineNum);
       	}
-      	i++;
-      	continue;
+
       }
 
       else if (chars[i] == '/') {
@@ -389,7 +400,7 @@ public class Scanner {
       }
 
       else {
-        scannerError("Illegal");
+        scannerError("Illegal character: \"" + chars[i] + "\" found on line " + lineNum);
       }
     }
   }
@@ -398,18 +409,15 @@ public class Scanner {
     return ('A'<=c && c<='Z') || ('a'<=c && c<='z') || (c=='_');
   }
 
-
   private boolean isDigit(char c) {
     return '0'<=c && c<='9';
   }
-
 
   public boolean isCompOpr() {
     TokenKind k = curToken().kind;
     //-- Must be changed in part 2:
     return false;
   }
-
 
   public boolean isFactorPrefix() {
     TokenKind k = curToken().kind;
@@ -431,62 +439,18 @@ public class Scanner {
     return false;
   }
 
-  private Token getKeyword(String word, int  lineNum){
-    Token tok = null;
-
-    if( word.equals("and") ){
-  		tok = new Token(andToken,  lineNum);
-  	}
-  	else if( word.equals("def") ){
-  		tok = new Token(defToken,  lineNum);
-  	}
-  	else if( word.equals("elif") ){
-  		tok = new Token(elifToken,  lineNum);
-  	}
-  	else if( word.equals("else") ){
-  		tok = new Token(elseToken,  lineNum);
-  	}
-  	else if( word.equals("False") ){
-  		tok = new Token(falseToken,  lineNum);
-  	}
-  	else if( word.equals("for") ){
-  		tok = new Token(forToken,  lineNum);
-  	}
-  	else if( word.equals("if") ){
-  		tok = new Token(ifToken,  lineNum);
-  	}
-  	else if( word.equals("in") ){
-  		tok = new Token(inToken,  lineNum);
-  	}
-  	else if( word.equals("None") ){
-  		tok = new Token(noneToken,  lineNum);
-  	}
-  	else if( word.equals("not") ){
-  		tok = new Token(notToken,  lineNum);
-  	}
-  	else if( word.equals("or") ){
-  		tok = new Token(orToken,  lineNum);
-  	}
-  	else if( word.equals("pass") ){
-  		tok = new Token(passToken,  lineNum);
-  	}
-  	else if( word.equals("return") ){
-  		tok = new Token(returnToken,  lineNum);
-  	}
-  	else if( word.equals("true") ){
-  		tok = new Token(trueToken,  lineNum);
-  	}
-  	else if( word.equals("while") ){
-  		tok = new Token(whileToken,  lineNum);
-  	}
-  	else{
-  		tok = new Token(nameToken,  lineNum);
-  		tok.name=word;
-  	}
-  	return tok;
+  private Token getKeyword(String word, int linNum) {
+    for (TokenKind tk : TokenKind.values()) {
+      if (tk.toString().equals(word)) {
+        return new Token(tk, linNum);
+      }
+    }
+    Token tok = new Token(nameToken, linNum);
+    tok.name=word;
+    return tok;
   }
 
-  private void indentDo(String instr, int  lineNum){
+  public void indentDo(String instr, int  lineNum){
   	int dent;
   	int dedentct = 0;
   	// if is isEmpty ignore
@@ -507,7 +471,7 @@ public class Scanner {
   			}
   		}
   		else{
-  			scannerError ( "indent depth does not match any start of block" );
+  			scannerError("indent depth does not match any start of block");
   			return;
   		}
   	}
