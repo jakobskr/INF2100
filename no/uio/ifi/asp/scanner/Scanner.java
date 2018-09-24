@@ -189,7 +189,7 @@ public class Scanner {
     char[] chars = line.toCharArray();
     int i = 0;
 
-    System.out.println(line);
+    //System.out.println(line);
     while (i < chars.length) {
       Token tok = null;
       //System.out.println(i + " "  + chars.length + chars[i]);
@@ -200,7 +200,7 @@ public class Scanner {
 
       if (isLetterAZ(chars[i])) {
         String str = "";
-        while(i < chars.length && isLetterAZ(chars[i]) ) {
+        while(i < chars.length && (isLetterAZ(chars[i]) || isDigit(chars[i]))) {
           str = str + chars[i];
           i++;
         }
@@ -258,7 +258,7 @@ public class Scanner {
         }
 
         if (i < chars.length && chars[i] == '.') {
-          if ((i < chars.length) || !isDigit(chars[i + 1])) {
+          if (!(i < chars.length - 1) || !isDigit(chars[i + 1])) {
             scannerError("Illegal float literal at line " + lineNum);
           }
           str = str + chars[i];
@@ -370,16 +370,17 @@ public class Scanner {
       	else{
       		scannerError("Unexpected symbol \"" + chars[i] + "\" at line " + lineNum);
       	}
-
+        i++;
+        continue;
       }
 
       else if (chars[i] == '/') {
       	if (chars[i+1] == '/'){
-      		curLineTokens.add(new Token(slashToken,  lineNum));
+          curLineTokens.add(new Token(doubleSlashToken,  lineNum));
       		i++;
       	}
-      	else{
-      		curLineTokens.add(new Token(doubleSlashToken,  lineNum));
+      	else {
+          curLineTokens.add(new Token(slashToken,  lineNum));
       	}
       	i++;
       	continue;

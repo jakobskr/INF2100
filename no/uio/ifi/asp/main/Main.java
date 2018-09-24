@@ -76,7 +76,7 @@ public class Main {
     private static void doTestScanner(Scanner s) {
 	do {
 	    s.readNextToken();
-      System.out.println(s.curToken().showInfo());
+      //System.out.println(s.curToken().showInfo());
       //System.out.println("xdd");
 
 	} while (s.curToken().kind != eofToken);
