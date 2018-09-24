@@ -5,6 +5,13 @@ import java.util.*;
 import no.uio.ifi.asp.main.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+/**
+ * The token that the asp scanner generates
+ * Can be a varied amount of different kinds, see TokenKind.java
+ * @author jakobskr
+ * @author Sigurson
+ * @version date
+ */
 public class Token {
   public TokenKind kind;
   public String name, stringLit;
@@ -23,6 +30,9 @@ public class Token {
   }
 
 
+  /**
+   * dont know what this does, it might come back in part 2,3 or 4
+   */
   void checkResWords() {
     if (kind != nameToken) return;
 
@@ -33,7 +43,10 @@ public class Token {
     }
   }
 
-
+  /**
+   * returns the value of the token in string  form
+   * @return the return string is in the form of ("%s token on line %d", kind, lineNum)
+   */
   public String showInfo() {
     String t = kind + " token";
     if (lineNum > 0) {
@@ -54,7 +67,10 @@ public class Token {
     return t;
   }
 
-
+  /**
+   * returns the tokenkind of the token
+   * @return the tokenkind of the token
+   */
   public String toString() {
     return kind.toString();
   }

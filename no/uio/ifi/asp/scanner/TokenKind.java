@@ -8,7 +8,9 @@ import no.uio.ifi.asp.main.*;
  * the tokens marked with "// not used in asp" are not valid asp Tokens,
  * but the scanner should still read them and generate the corresponding tokens.
  *
- * @author
+ * @author Jakobskr
+ * @author Sigurson
+ * @version date
  */
 public enum TokenKind {
     // Names and literals:
@@ -111,7 +113,11 @@ public enum TokenKind {
 	     image = s;
     }
 
+    /**
+     * returns the image of the token as a string
+     * @return the image as a string
+     */
     public String toString() {
-	return image;
+	     return image;
     }
 }
