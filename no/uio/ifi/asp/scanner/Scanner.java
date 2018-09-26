@@ -114,18 +114,23 @@ public class Scanner {
     line = expandLeadingTabs(line);
     //System.out.println("indent : " + indent);
 
-    for (char c: line.toCharArray()) {
-      if (c == ' ') {
+    char[] ts = line.toCharArray();
+
+    for (int i = 0; i <= ts.length; i++) {
+      if (i == ts.length) {
+        return;
+      }
+
+      if (ts[i] == ' ' ) {
         continue;
       }
 
-      else if(c == '#') {
+      else if(ts[i] == '#') {
         return;
       }
 
       else break;
     }
-
 
     indentDo(line, curLineNum());
     genTokens(line, curLineNum());
@@ -157,7 +162,7 @@ public class Scanner {
 
 	/**
 	 *turns indents into spaces
-	 * @param  s string with tabs to be converted
+	 *@param  s string with tabs to be converted
  	 *@return string with tabs converted to spaces.
 	 */
 
