@@ -7,8 +7,8 @@ import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 public class Main {
-    public static final String version = "2018-08-17";
-
+    public static final String version = "2018-09-27";
+    public static final String authors = "Jakobskr/Sigurson";
     public static LogFile log = null;
 
     public static void main(String arg[]) {
@@ -16,8 +16,8 @@ public class Main {
 	boolean testExpr = false, testParser = false, testScanner = false,
 	    logE = false, logP = false, logS = false, logY = false;
 
-      System.out.println("This is the INF2100 Asp interpreter (" +
-			   version + ")");
+      System.out.println("This is INF2100 Asp interpreter (" +
+			   version + ") made by [" + authors + "]");
 
 	for (int i = 0;  i < arg.length;  i++) {
 	    String a = arg[i];
