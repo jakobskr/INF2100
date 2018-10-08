@@ -19,11 +19,9 @@ public class Token {
   public double floatLit;
   public int lineNum;
 
-
   Token(TokenKind k) {
     this(k, 0);
   }
-
 
   Token(TokenKind k, int lNum) {
     kind = k;  lineNum = lNum;

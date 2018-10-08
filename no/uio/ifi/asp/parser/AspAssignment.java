@@ -1,0 +1,42 @@
+package no.uio.ifi.asp.parser;
+import java.util.ArrayList;
+import no.uio.ifi.asp.main.*;
+import no.uio.ifi.asp.runtime.*;
+import no.uio.ifi.asp.scanner.*;
+import static no.uio.ifi.asp.scanner.TokenKind.*;
+
+class AspAssignment extends AspStmt {
+	ArrayList<AspSubscription> subs = new ArrayList<>();
+	AspName name;
+	AspExpr exp;
+
+	AspAssignment(int n) {
+    super(n);
+  }
+
+	static AspAssignment parse(Scanner s) {
+		enterParser("assignment");
+		AspAssignment aass = new AspAssignment(s.curLineNum());
+		aass.name = AspName.parse(s);
+
+		while ( s.curToken().kind != equalToken){
+			aass.subs.add(AspSubscription.parse(s));
+		}
+
+		skip(s, equalToken);
+
+		aass.exp = AspExpr.parse(s);
+
+		skip(s, newLineToken);
+		leaveParser("assignment");
+		return aass;
+	}
+
+	RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+		return null;
+	}
+
+	public void prettyPrint() {
+		//do Nothing
+	}
+}
