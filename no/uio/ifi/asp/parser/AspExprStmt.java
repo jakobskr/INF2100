@@ -29,15 +29,9 @@ public class AspExprStmt extends AspStmt {
 
   @Override
   void prettyPrint() {
-    int nPrinted = 0;
-    //ASK FOR HELP:
+    expr.prettyPrint();
+    Main.log.prettyWriteLn();
 
-    /*
-    for ( AspExprStmt ant: notTests) {
-      if (nPrinted > 0)
-      Main.log.prettyWrite(" and ");
-      ant.prettyPrint(); ++nPrinted;
-    }*/
   }
 
   // @Override

@@ -43,12 +43,14 @@ class AspDictDisplay extends AspAtom {
 
   @Override
   void prettyPrint() {
-    /*int nPrinted = 0;
-
-    for (AspNotTest at: terms) {
+    int nPrinted = 0;
+		Main.log.prettyWrite("{");
+		for (AspString ant: exps) {
       if (nPrinted > 0)
-      Main.log.prettyWrite(" factor ");
+      Main.log.prettyWrite(", ");
       ant.prettyPrint(); ++nPrinted;
-    }*/
+			Main.log.prettyWrite(":");
+			exps.get(ant).prettyPrint();
+    }
   }
 }

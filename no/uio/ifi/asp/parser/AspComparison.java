@@ -38,16 +38,17 @@ class AspComparison extends AspSyntax {
    return acmp;
   }
 
-  @Override
+	@Override
   void prettyPrint() {
     int nPrinted = 0;
 
-    /*for (AspNotTest at: terms) {
+    for (AspTerm ant: terms) {
+			ant.prettyPrint(); ++nPrinted;
       if (nPrinted > 0)
-      Main.log.prettyWrite(" and ");
-      ant.prettyPrint(); ++nPrinted;
-    }*/
+      	Main.log.prettyWrite(ops.get(nPrinted-1).tok.toString());
+    }
   }
+
 
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     //-- Must be changed in part 3:

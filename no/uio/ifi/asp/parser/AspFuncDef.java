@@ -51,12 +51,17 @@ class AspFuncDef extends AspStmt {
 
   @Override
   void prettyPrint() {
-    int nPrinted = 0;
-    //
-    // for (AspNotTest at: terms) {
-    //   if (nPrinted > 0)
-    //   Main.log.prettyWrite(" factor ");
-    //   ant.prettyPrint(); ++nPrinted;
-    // }
+    main.log.prettyWrite("def ");
+		name.prettyPrint();
+
+		nPrinted = 0;
+		for (AspPrimary p: prims) {
+      if (nPrinted > 0)
+      main.log.prettyWrite(factop.get(nPrinted-1).tok.toString());
+			if(prims(nPrinted).tok != null){
+				main.log.prettyWrite(prims(nPrinted).tok.toString());
+			}
+      prims.prettyPrint(); ++nPrinted;
+    }
   }
 }

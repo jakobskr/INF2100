@@ -30,8 +30,15 @@ public class AspBool extends AspAtom {
     return abol;
     }
 
-    public void prettyPrint() {
-    int n = 0;
+		@Override
+		void prettyPrint() {
+			if(value){
+				Main.log.prettyWrite("true");
+			}
+			else{
+				Main.log.prettyWrite("false");
+			}
+		}
   }
 
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {

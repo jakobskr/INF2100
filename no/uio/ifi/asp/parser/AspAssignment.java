@@ -36,7 +36,13 @@ class AspAssignment extends AspStmt {
 		return null;
 	}
 
-	public void prettyPrint() {
-		//do Nothing
-	}
+	@Override
+  void prettyPrint() {
+		name.prettyPrint();
+    for (AspSubscription ant: subs) {
+      ant.prettyPrint();
+    }
+		Main.log.prettyWrite(" = ");
+		exp.prettyPrint();
+  }
 }

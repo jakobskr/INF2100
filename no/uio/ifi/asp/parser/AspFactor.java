@@ -65,13 +65,16 @@ class AspFactor extends AspSyntax {
 
   @Override
   void prettyPrint() {
-    // int nPrinted = 0;
-    //
-    // for (AspPrimary p: prims) {
-    //   if (nPrinted > 0)
-    //   Main.log.prettyWrite(" and ");
-    //   afct.prettyPrint(); ++nPrinted;
-    // }
+    int nPrinted = 0;
+
+    for (AspPrimary p: prims) {
+      if (nPrinted > 0)
+      main.log.prettyWrite(factop.get(nPrinted-1).tok.toString());
+			if(prims(nPrinted).tok != null){
+				main.log.prettyWrite(prims(nPrinted).tok.toString());
+			}
+      prims.prettyPrint(); ++nPrinted;
+    }
   }
 
   // @Override

@@ -61,9 +61,10 @@ public class AspAtom extends AspSyntax {
     return atom;
 	}
 
+	@Override
 	void prettyPrint() {
-    int n = 0;
-  }
+		atom.prettyPrint()
+	}
 
 	RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     return null;

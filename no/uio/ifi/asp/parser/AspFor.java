@@ -30,13 +30,12 @@ class AspFor extends AspStmt{
 	}
 	@Override
   void prettyPrint() {
-    // int nPrinted = 0;
-		//
-    // for (AspNotTest at: terms) {
-    //   if (nPrinted > 0)
-    //   Main.log.prettyWrite(" for ");
-    //   ant.prettyPrint(); ++nPrinted;
-    // }
+    main.log.prettyWrite("for");
+		name.prettyPrint();
+		main.log.prettyWrite("in");
+		exp.prettyPrint();
+		main.log.prettywrite(":");
+		sut.prettyPrint();
   }
 
 	RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {

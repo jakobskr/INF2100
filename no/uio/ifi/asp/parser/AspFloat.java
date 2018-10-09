@@ -27,7 +27,7 @@ public class AspFloat extends AspAtom {
     }
 
     public void prettyPrint() {
-    int n = 0;
+	    main.log.prettyWrite(value);
   }
 
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
