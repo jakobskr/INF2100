@@ -16,7 +16,7 @@ class AspPrimary extends AspSyntax {
   }
 
   static AspPrimary parse(Scanner s) {
-    enterParser("Primary");
+    enterParser("primary");
 
     AspPrimary aprm = new AspPrimary(s.curLineNum());
     aprm.atom = AspAtom.parse(s);

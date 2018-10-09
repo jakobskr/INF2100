@@ -12,7 +12,7 @@ public class AspAtom extends AspSyntax {
 	}
 
 	static AspAtom parse(Scanner s) {
-		enterParser("Atom");
+		enterParser("atom");
     AspAtom atom = null;
     Token temp = s.curToken();
 
@@ -53,7 +53,7 @@ public class AspAtom extends AspSyntax {
     }
 
 
-    leaveParser("Atom");
+    leaveParser("atom");
 
     if (atom == null) {
       parserError("Unexpected \"" + s.curToken() + "\" token", s.curLineNum());

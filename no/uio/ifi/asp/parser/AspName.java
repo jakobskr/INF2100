@@ -14,19 +14,19 @@ public class AspName extends AspAtom {
 
 
 	public static AspName parse(Scanner s) {
-		enterParser("Name");
+		enterParser("name");
     AspName anam = new AspName(s.curLineNum());
 
     Token temp = s.curToken();
 
     anam.name = temp.name;
     skip(s, nameToken);
-    leaveParser("Name");
+    leaveParser("name");
     return anam;
 	}
 
 	public void prettyPrint() {
-    int n = 0;
+    Main.log.prettyWrite(name);
   }
 
 	RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {

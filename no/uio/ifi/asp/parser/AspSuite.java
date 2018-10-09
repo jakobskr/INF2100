@@ -20,7 +20,7 @@ class AspSuite extends AspSyntax{
 		skip(s, newLineToken);
 		skip(s, indentToken);
 
-		while ( s.curToken().kind != dedentToken){
+		while (s.curToken().kind != dedentToken){
 			asut.stms.add(AspStmt.parse(s));
 		}
 

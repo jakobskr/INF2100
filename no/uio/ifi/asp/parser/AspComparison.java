@@ -26,7 +26,7 @@ class AspComparison extends AspSyntax {
 
      if (tok.kind == greaterToken ) acmp.ops.add(new AspCompOpr (tok));
            else if (tok.kind == lessToken) acmp.ops.add(new AspCompOpr (tok));
-           else if (tok.kind == equalToken) acmp.ops.add(new AspCompOpr (tok));
+           else if (tok.kind == doubleEqualToken) acmp.ops.add(new AspCompOpr (tok));
            else if (tok.kind == lessEqualToken) acmp.ops.add(new AspCompOpr (tok));
            else if (tok.kind == greaterEqualToken) acmp.ops.add(new AspCompOpr (tok));
            else if (tok.kind == notEqualToken) acmp.ops.add(new AspCompOpr (tok));

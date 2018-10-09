@@ -5,27 +5,26 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
-class AspFor extends AspStmt{
+class AspWhile extends AspStmt{
 	AspSuite sut;
-	AspName name;
 	AspExpr exp;
 
-	AspFor(int n) {
+	AspWhile(int n) {
     super(n);
   }
 
-	static AspFor parse(Scanner s) {
-		enterParser("for");
-		AspFor afor = new AspFor(s.curLineNum());
-		skip(s, forToken);
-		afor.name = AspName.parse(s);
-		skip(s, inToken);
-		afor.exp = AspExpr.parse(s);
-		skip(s,colonToken);
-		afor.sut = AspSuite.parse(s);
+	static AspWhile parse(Scanner s) {
+		enterParser("while");
 
-		leaveParser("for");
-		return afor;
+		AspWhile awil = new AspWhile(s.curLineNum());
+
+		skip(s, whileToken);
+		awil.exp = AspExpr.parse(s);
+		skip(s,colonToken);
+		awil.sut = AspSuite.parse(s);
+
+		leaveParser("while");
+		return awil;
 
 	}
 	@Override

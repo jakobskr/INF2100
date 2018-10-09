@@ -11,7 +11,6 @@ public abstract class AspStmt extends AspSyntax {
 		super(n);
 	}
 
-
 	static AspStmt parse(Scanner s) {
 		enterParser("stmt");
 		Token tok = s.curToken();
@@ -23,11 +22,24 @@ public abstract class AspStmt extends AspSyntax {
 		}
 
 		else if (tok.kind == ifToken) {
-			//implement this
+			System.out.println("hello hello hello");
+			astm = AspIf.parse(s);
 		}
 
 		else if(tok.kind == whileToken) {
-			//implement this
+			astm = AspWhile.parse(s);
+		}
+
+		else if (tok.kind == passToken) {
+			astm = AspPass.parse(s);
+		}
+
+		else if (tok.kind == returnToken) {
+			astm = AspReturn.parse(s);
+		}
+
+		else if (tok.kind == defToken) {
+			astm = AspFuncDef.parse(s);
 		}
 
 		else {

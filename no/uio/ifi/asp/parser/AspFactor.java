@@ -20,7 +20,7 @@ class AspFactor extends AspSyntax {
   }
 
   static AspFactor parse(Scanner s) {
-    enterParser("and test");
+    enterParser("factor");
 
     AspFactor afct = new AspFactor(s.curLineNum());
     while (true) {

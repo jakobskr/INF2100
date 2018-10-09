@@ -16,6 +16,7 @@ class AspSubscription extends AspPrimarySuffix {
   }
 
   static AspSubscription parse(Scanner s) {
+    enterParser("primary suffix");
     enterParser("subscription");
 
     AspSubscription asub = new AspSubscription(s.curLineNum());
@@ -29,6 +30,7 @@ class AspSubscription extends AspPrimarySuffix {
 
 
     leaveParser("arguments");
+    leaveParser("primary suffix");
     return asub;
   }
 
