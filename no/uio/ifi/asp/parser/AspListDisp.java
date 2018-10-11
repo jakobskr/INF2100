@@ -41,12 +41,13 @@ class AspListDisp extends AspAtom {
 
   @Override
   void prettyPrint() {
-  //   int nPrinted = 0;
-  //
-  //   for (AspNotTest at: terms) {
-  //     if (nPrinted > 0)
-  //     Main.log.prettyWrite(" list ");
-  //     ant.prettyPrint(); ++nPrinted;
-  //   }
+    int nPrinted = 0;
+		Main.log.prettyWrite("[");
+    for (AspExpr at: exps) {
+      if (nPrinted > 0)
+      Main.log.prettyWrite(", ");
+      ant.prettyPrint(); ++nPrinted;
+    }
+		Main.log.prettyWrite("]");
   }
 }
