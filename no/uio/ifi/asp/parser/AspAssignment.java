@@ -5,6 +5,15 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+
+/**
+ * Asp assignment stores a name, 0-n subscriptions, an equal sign, an expression and then a newline for later evaluation
+ * 
+ *
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 class AspAssignment extends AspStmt {
 	ArrayList<AspSubscription> subs = new ArrayList<>();
 	AspName name;

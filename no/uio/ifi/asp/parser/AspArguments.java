@@ -5,6 +5,17 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+
+
+
+/**
+ * Contains 0-n expressions.
+ *
+ *
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 class AspArguments extends AspPrimarySuffix {
   ArrayList<AspExpr> exps = new ArrayList<>();
 
