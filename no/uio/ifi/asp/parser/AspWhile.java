@@ -14,7 +14,7 @@ class AspWhile extends AspStmt{
   }
 
 	static AspWhile parse(Scanner s) {
-		enterParser("while");
+		enterParser("while stmt");
 
 		AspWhile awil = new AspWhile(s.curLineNum());
 
@@ -23,7 +23,7 @@ class AspWhile extends AspStmt{
 		skip(s,colonToken);
 		awil.sut = AspSuite.parse(s);
 
-		leaveParser("while");
+		leaveParser("while stmt");
 		return awil;
 
 	}
