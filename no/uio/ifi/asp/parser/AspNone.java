@@ -26,7 +26,7 @@ public class AspNone extends AspAtom {
     }
 
     public void prettyPrint() {
-    int n = 0;
+    	Main.log.prettyWrite("none");
   }
 
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {

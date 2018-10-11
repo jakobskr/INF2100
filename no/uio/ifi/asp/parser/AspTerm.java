@@ -37,11 +37,11 @@ class AspTerm extends AspSyntax {
   void prettyPrint() {
     int nPrinted = 0;
 
-    // for (AspTerm at: factors) {
-    //   if (nPrinted > 0)
-    //   Main.log.prettyWrite(" term ");
-    //   ant.prettyPrint(); ++nPrinted;
-    // }
+    for (AspFactor ant: factors) {
+      if (nPrinted > 0)
+      Main.log.prettyWrite(ops.get(nprinted-1).toString());
+      ant.prettyPrint(); ++nPrinted;
+    }
   }
 
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {

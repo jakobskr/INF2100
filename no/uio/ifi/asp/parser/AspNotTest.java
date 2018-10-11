@@ -8,7 +8,7 @@ import static no.uio.ifi.asp.scanner.TokenKind.*;
 public class AspNotTest extends AspSyntax {
 
   AspComparison comp;
-  Boolean not = false;
+  Boolean notto = false;
 
   public AspNotTest(int n) {
     super(n);
@@ -22,7 +22,7 @@ public class AspNotTest extends AspSyntax {
     if (s.curToken().kind == notToken) {
       // ask for help on this!
       skip(s, notToken);
-      ant.not = true;
+      ant.notto = true;
     }
 
     ant.comp = AspComparison.parse(s);
@@ -33,15 +33,10 @@ public class AspNotTest extends AspSyntax {
 
   @Override
   void prettyPrint() {
-    int nPrinted = 0;
-    //ASK FOR HELP:
-
-    /*
-    for (AspNotTest ant: notTests) {
-      if (nPrinted > 0)
-      Main.log.prettyWrite(" and ");
-      ant.prettyPrint(); ++nPrinted;
-    }*/
+    if(! notto){
+			Main.log.prettyWrite( "! ");
+		}
+		comp.prettyPrint();
   }
 
   // @Override

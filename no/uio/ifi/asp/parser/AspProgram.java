@@ -34,9 +34,12 @@ public class AspProgram extends AspSyntax {
 
 
   @Override
-  public void prettyPrint() {
-    //-- Must be changed in part 2:
-  }
+	void prettyPrint() {
+		atom.prettyPrint();
+    for (AspStmt ant: stmts) {
+      ant.prettyPrint();
+    }
+	}
 
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     //-- Must be changed in part 4:

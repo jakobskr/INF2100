@@ -6,7 +6,7 @@ import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 class AspSubscription extends AspPrimarySuffix {
-  ArrayList<AspExpr> exps = new ArrayList<>();
+  AspExpr exps = null;
 	//ASK FOR HELP:
 	//skal listen inneholde [term comp term comp term] eller [term term term] med en ekstra liste med [comp comp comp] i seg?
 
@@ -23,7 +23,7 @@ class AspSubscription extends AspPrimarySuffix {
 
 		skip(s, leftBracketToken);
 
-		asub.exps.add(AspExpr.parse(s));
+		asub.exps = AspExpr.parse(s);
 		TokenKind temp = s.curToken().kind;
 
 		skip(s, rightBracketToken);
@@ -36,13 +36,10 @@ class AspSubscription extends AspPrimarySuffix {
 
   @Override
   void prettyPrint() {
-    int nPrinted = 0;
+    Main.log.prettyWrite("[");
+		exps.prettyPrint();
+		Main.log.prettyWrite("]");
 
-    // for (AspNotTest at: terms) {
-    //   if (nPrinted > 0)
-    //   Main.log.prettyWrite(" factor ");
-    //   ant.prettyPrint(); ++nPrinted;
-    // }
   }
 
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {

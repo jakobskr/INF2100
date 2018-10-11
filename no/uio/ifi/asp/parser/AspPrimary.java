@@ -33,14 +33,12 @@ class AspPrimary extends AspSyntax {
   }
 
   // @Override
-   void prettyPrint() {
-  //   int nPrinted = 0;
-	//
-  //   for (AspNotTest at: terms) {
-  //     if (nPrinted > 0)
-  //     Main.log.prettyWrite(" factor ");
-  //     ant.prettyPrint(); ++nPrinted;
-  //   }
+  void prettyPrint() {
+		atom.prettyPrint();
+    for (AspPrimarySuffix ant: prisuf) {
+      ant.prettyPrint();
+    }
+	}
 }
 
   // @Override

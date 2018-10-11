@@ -25,15 +25,10 @@ public class AspReturn extends AspStmt {
 
   @Override
   void prettyPrint() {
-    int nPrinted = 0;
-    //ASK FOR HELP:
+    Main.log.prettyWrite("return ");
+		expr.prettyPrint();
+		Main.log.prettyWriteLn();
 
-    /*
-    for ( AspReturn ant: notTests) {
-      if (nPrinted > 0)
-      Main.log.prettyWrite(" and ");
-      ant.prettyPrint(); ++nPrinted;
-    }*/
   }
 
   // @Override

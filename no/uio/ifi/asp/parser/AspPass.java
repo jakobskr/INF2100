@@ -23,7 +23,7 @@ public class AspPass extends AspStmt {
     }
 
     public void prettyPrint() {
-    int n = 0;
+	    Main.log.prettyWrite("pass");
   }
 
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {

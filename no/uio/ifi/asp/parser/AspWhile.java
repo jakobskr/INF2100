@@ -29,13 +29,10 @@ class AspWhile extends AspStmt{
 	}
 	@Override
   void prettyPrint() {
-    // int nPrinted = 0;
-		//
-    // for (AspNotTest at: terms) {
-    //   if (nPrinted > 0)
-    //   Main.log.prettyWrite(" for ");
-    //   ant.prettyPrint(); ++nPrinted;
-    // }
+  	Main.log.prettyWrite("while");
+		exp.prettyPrint();
+		Main.log.prettyWrite(": ")
+		sut.prettyPrint();
   }
 
 	RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
