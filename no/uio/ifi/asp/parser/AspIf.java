@@ -7,7 +7,7 @@ import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 class AspIf extends AspStmt {
   ArrayList<AspExpr> exps = new ArrayList<>();
-	ArrayList<AspSuite> suit1 = new ArrayList<>();
+	ArrayList<AspSuite> sut = new ArrayList<>();
 	AspSuite elsut = null;
 
   AspIf(int n) {
@@ -25,7 +25,7 @@ class AspIf extends AspStmt {
       System.out.println("xd");
 			asif.exps.add(AspExpr.parse(s));
 			skip(s,colonToken);
-			asif.suit1.add(AspSuite.parse(s));
+			asif.sut.add(AspSuite.parse(s));
 
 			TokenKind temp = s.curToken().kind;
 			if (temp == elifToken ) skip (s , elifToken);
@@ -54,11 +54,17 @@ class AspIf extends AspStmt {
   @Override
   void prettyPrint() {
     int nPrinted = 0;
-
-    // for (AspNotTest at: terms) {
-    //   if (nPrinted > 0)
-    //   Main.log.prettyWrite(" factor ");
-    //   ant.prettyPrint(); ++nPrinted;
-    // }
+		Main.log.prettyWrite("if ");
+    for (AspExpr ant: exps) {
+      if (nPrinted > 0)
+			ant.prettyPrint();
+      Main.log.prettyWrite(": ");
+			sut.get(nPrinted).prettyPrint();
+			++nPrinted;
+		if (elsut != null){
+			Main.log.prettyWrite("else: ");
+			elsut.prettyPrint();
+		}
   }
+
 }

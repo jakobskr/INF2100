@@ -7,8 +7,6 @@ import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 class AspInnerExpression extends AspAtom {
   AspExpr exps;
-	//ASK FOR HELP:
-	//skal listen inneholde [term comp term comp term] eller [term term term] med en ekstra liste med [comp comp comp] i seg?
 
 
   AspInnerExpression(int n) {
@@ -33,13 +31,7 @@ class AspInnerExpression extends AspAtom {
 
   @Override
   void prettyPrint() {
-    int nPrinted = 0;
-
-    // for (AspNotTest at: terms) {
-    //   if (nPrinted > 0)
-    //   Main.log.prettyWrite(" factor ");
-    //   ant.prettyPrint(); ++nPrinted;
-    // }
+    exps.prettyPrint();
   }
 
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {

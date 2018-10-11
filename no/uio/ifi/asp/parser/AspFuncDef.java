@@ -53,15 +53,15 @@ class AspFuncDef extends AspStmt {
   void prettyPrint() {
     main.log.prettyWrite("def ");
 		name.prettyPrint();
-
+		main.log.prettyWrite("(");
 		nPrinted = 0;
-		for (AspPrimary p: prims) {
+		for (AspName p: names) {
       if (nPrinted > 0)
-      main.log.prettyWrite(factop.get(nPrinted-1).tok.toString());
-			if(prims(nPrinted).tok != null){
-				main.log.prettyWrite(prims(nPrinted).tok.toString());
-			}
-      prims.prettyPrint(); ++nPrinted;
+      main.log.prettyWrite(", ");
+      p.prettyPrint(); ++nPrinted;
     }
+		main.log.prettyWrite(")");
+		main.log.prettyWrite(":");
+		sut.prettyPrint();
   }
 }
