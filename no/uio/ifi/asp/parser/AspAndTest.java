@@ -5,6 +5,16 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+
+
+/**
+ * Reads a line from an .asp sourcefile and generates a list of asp tokens
+ *
+ *
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 class AspAndTest extends AspSyntax {
   ArrayList<AspNotTest> notTests = new ArrayList<>();
 
