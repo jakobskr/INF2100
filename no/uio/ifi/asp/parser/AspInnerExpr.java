@@ -14,7 +14,7 @@ class AspInnerExpression extends AspAtom {
   }
 
   static AspInnerExpression parse(Scanner s) {
-    enterParser("inner expression");
+    enterParser("inner expr");
 
     AspInnerExpression asub = new AspInnerExpression(s.curLineNum());
 
@@ -25,13 +25,15 @@ class AspInnerExpression extends AspAtom {
 
 		skip(s, rightParToken);
 
-    leaveParser("inner expression");
+    leaveParser("inner expr");
     return asub;
   }
 
   @Override
   void prettyPrint() {
+    Main.log.prettyWrite("(");
     exps.prettyPrint();
+    Main.log.prettyWrite(")");
   }
 
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {

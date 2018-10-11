@@ -29,13 +29,14 @@ class AspWhile extends AspStmt{
 	}
 	@Override
   void prettyPrint() {
+		Main.log.prettyWriteLn();
   	Main.log.prettyWrite("while");
 		exp.prettyPrint();
-		Main.log.prettyWrite(": ")
+		Main.log.prettyWrite(": ");
 		sut.prettyPrint();
   }
 
-	RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+	public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
 		return null;
 	}
 }

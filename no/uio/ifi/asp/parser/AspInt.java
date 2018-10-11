@@ -14,7 +14,7 @@ public class AspInt extends AspAtom {
 
 
     public static AspInt parse(Scanner s) {
-        enterParser("Int");
+        enterParser("integer literal");
     AspInt aint = new AspInt(s.curLineNum());
 
     Token temp = s.curToken();
@@ -22,12 +22,12 @@ public class AspInt extends AspAtom {
     aint.value = temp.integerLit;
     skip(s, integerToken);
 
-    leaveParser("Int");
+    leaveParser("integer literal");
     return aint;
     }
 
     public void prettyPrint() {
-    	Main.log.prettyWrite(value.toString());
+    	Main.log.prettyWrite(Long.toString(value));
   }
 
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {

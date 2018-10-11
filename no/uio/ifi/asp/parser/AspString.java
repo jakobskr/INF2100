@@ -13,18 +13,18 @@ public class AspString extends AspAtom {
     }
 
     public static AspString parse(Scanner s) {
-        enterParser("String");
+        enterParser("string literal");
     AspString astr = new AspString(s.curLineNum());
     Token temp = s.curToken();
     astr.value = temp.stringLit;
     skip(s, stringToken);
 
-    leaveParser("String");
+    leaveParser("string literal");
     return astr;
     }
 
     public void prettyPrint() {
-	    Main.log.prettyWrite(value);
+	    Main.log.prettyWrite("\"" + value + "\"");
   }
 
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {

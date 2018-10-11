@@ -8,7 +8,7 @@ import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 /**
  * Asp assignment stores a name, 0-n subscriptions, an equal sign, an expression and then a newline for later evaluation
- * 
+ *
  *
  * @author jakobskr
  * @author Sigurson
@@ -47,6 +47,7 @@ class AspAssignment extends AspStmt {
 
 	@Override
   void prettyPrint() {
+		Main.log.prettyWriteLn();
 		name.prettyPrint();
     for (AspSubscription ant: subs) {
       ant.prettyPrint();

@@ -51,6 +51,7 @@ class AspFuncDef extends AspStmt {
 
   @Override
   void prettyPrint() {
+    int nPrinted = 0;
     Main.log.prettyWrite("def ");
 		name.prettyPrint();
 		Main.log.prettyWrite("(");

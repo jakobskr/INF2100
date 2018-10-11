@@ -17,7 +17,7 @@ class AspListDisp extends AspAtom {
   }
 
   static AspListDisp parse(Scanner s) {
-    enterParser("List");
+    enterParser("list display");
     AspListDisp alst = new AspListDisp(s.curLineNum());
 		skip(s, leftBracketToken);
 
@@ -35,7 +35,7 @@ class AspListDisp extends AspAtom {
     }
 
 		skip(s, rightBracketToken);
-    leaveParser("List");
+    leaveParser("list display");
     return alst;
   }
 
@@ -46,7 +46,7 @@ class AspListDisp extends AspAtom {
     for (AspExpr at: exps) {
       if (nPrinted > 0)
       Main.log.prettyWrite(", ");
-      ant.prettyPrint(); ++nPrinted;
+      at.prettyPrint(); ++nPrinted;
     }
 		Main.log.prettyWrite("]");
   }

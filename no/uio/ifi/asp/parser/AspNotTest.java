@@ -33,8 +33,8 @@ public class AspNotTest extends AspSyntax {
 
   @Override
   void prettyPrint() {
-    if(! notto){
-			Main.log.prettyWrite( "! ");
+    if(notto){
+			Main.log.prettyWrite("not ");
 		}
 		comp.prettyPrint();
   }

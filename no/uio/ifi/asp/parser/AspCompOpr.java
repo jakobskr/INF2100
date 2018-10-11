@@ -5,16 +5,72 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
-public class AspCompOpr {
+public class AspCompOpr extends AspSyntax{
   public Token tok;
-  public String image;
 
-  AspCompOpr(Token tok) {
-    this.tok = tok;
+  String image;
+
+  public AspCompOpr(int n) {
+    super(n);
   }
 
-  public Token getToken() {
-    return tok;
+  public static AspCompOpr parse(Scanner s) {
+    enterParser("comp opr");
+    AspCompOpr afop = new AspCompOpr(s.curLineNum());
+
+    Token tok = s.curToken();
+
+    if (tok.kind == notEqualToken) {
+      afop.tok = tok;
+      skip(s,tok.kind);
+    }
+
+    else if (tok.kind == greaterToken) {
+      afop.tok = tok;
+      skip(s, tok.kind);
+    }
+    else if (tok.kind == lessToken) {
+      afop.tok = tok;
+      skip(s, tok.kind);
+    }
+    else if (tok.kind == doubleEqualToken) {
+      afop.tok = tok;
+      skip(s, tok.kind);
+    }
+
+    else if (tok.kind == lessEqualToken) {
+      afop.tok = tok;
+      skip(s, tok.kind);
+    }
+
+    else if (tok.kind == greaterEqualToken) {
+      afop.tok = tok;
+      skip(s, tok.kind);
+    }
+
+    else {
+      parserError("unexpected token \"" + tok + "\"", s.curLineNum());
+    }
+
+    leaveParser("comp opr");
+    return afop;
   }
-	//we gooci
+
+  public String toString() {
+     return "AspCompOpr: "+ tok;
+  }
+
+
+  @Override
+  void prettyPrint() {
+    int nPrinted = 0;
+    Main.log.prettyWrite(tok.kind.toString());
+  }
+
+  // @Override
+  public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+    //-- Must be changed in part 3:
+    return null;
+  }
+	//oh hey mark
 }

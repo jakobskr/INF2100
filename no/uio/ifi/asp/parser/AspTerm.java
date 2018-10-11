@@ -24,8 +24,7 @@ class AspTerm extends AspSyntax {
     while (true) {
       atrm.factors.add(AspFactor.parse(s));
 			Token tok = s.curToken();
-      if (tok.kind == plusToken) atrm.ops.add(new AspTermOpr(tok));
-			else if (tok.kind == minusToken) atrm.ops.add(new AspTermOpr(tok));
+      if (anyTermOpr(tok.kind)) atrm.ops.add(AspTermOpr.parse(s));
 			else {break;}
     }
 
@@ -38,10 +37,20 @@ class AspTerm extends AspSyntax {
     int nPrinted = 0;
 
     for (AspFactor ant: factors) {
-      if (nPrinted > 0)
-      Main.log.prettyWrite(ops.get(nprinted-1).toString());
+      if (nPrinted > 0) {
+        Main.log.prettyWrite(" ");
+        ops.get(nPrinted - 1).prettyPrint();
+        Main.log.prettyWrite(" ");
+      }
       ant.prettyPrint(); ++nPrinted;
     }
+  }
+
+  public static boolean anyTermOpr(TokenKind tk) {
+    if (tk == plusToken || tk == minusToken) {
+      return true;
+    }
+    return false;
   }
 
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {

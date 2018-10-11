@@ -34,8 +34,8 @@ public class AspProgram extends AspSyntax {
 
 
   @Override
-	void prettyPrint() {
-		atom.prettyPrint();
+	public void prettyPrint() {
+		//atom.prettyPrint(); ?? is one correct?
     for (AspStmt ant: stmts) {
       ant.prettyPrint();
     }

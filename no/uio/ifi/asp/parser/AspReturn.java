@@ -14,12 +14,12 @@ public class AspReturn extends AspStmt {
   }
 
   public static AspReturn parse(Scanner s) {
-    enterParser("return");
+    enterParser("return stmt");
     skip(s, returnToken);
     AspReturn aret = new AspReturn(s.curLineNum());
     aret.expr = AspExpr.parse(s);
     skip(s,newLineToken);
-    leaveParser("return");
+    leaveParser("return stmt");
     return aret;
   }
 

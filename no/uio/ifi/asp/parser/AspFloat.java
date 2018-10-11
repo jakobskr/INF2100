@@ -14,15 +14,14 @@ public class AspFloat extends AspAtom {
 
 
     public static AspFloat parse(Scanner s) {
-        enterParser("Float");
-    System.out.println("Floating is good");
+    enterParser("float literal");
     AspFloat aflt = new AspFloat(s.curLineNum());
 
     Token temp = s.curToken();
 
     aflt.value = temp.floatLit;
     skip(s, floatToken);
-    leaveParser("Float");
+    leaveParser("float literal");
     return aflt;
     }
 

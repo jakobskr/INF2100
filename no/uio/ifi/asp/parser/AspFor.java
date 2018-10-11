@@ -15,7 +15,7 @@ class AspFor extends AspStmt{
   }
 
 	static AspFor parse(Scanner s) {
-		enterParser("for");
+		enterParser("for stmt");
 		AspFor afor = new AspFor(s.curLineNum());
 		skip(s, forToken);
 		afor.name = AspName.parse(s);
@@ -24,17 +24,18 @@ class AspFor extends AspStmt{
 		skip(s,colonToken);
 		afor.sut = AspSuite.parse(s);
 
-		leaveParser("for");
+		leaveParser("for stmt");
 		return afor;
 
 	}
 	@Override
   void prettyPrint() {
-    Main.log.prettyWrite("for");
+		Main.log.prettyWriteLn();
+    Main.log.prettyWrite("for ");
 		name.prettyPrint();
-		Main.log.prettyWrite("in");
+		Main.log.prettyWrite(" in ");
 		exp.prettyPrint();
-		Main.log.prettywrite(":");
+		Main.log.prettyWrite(":");
 		sut.prettyPrint();
   }
 

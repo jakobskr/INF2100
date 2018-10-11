@@ -23,8 +23,7 @@ class AspPrimary extends AspSyntax {
 		while (true) {
 
 			Token tok = s.curToken();
-      if (tok.kind == leftParToken ) aprm.prisuf.add(AspArguments.parse(s));
-			else if (tok.kind == leftBracketToken ) aprm.prisuf.add(AspSubscription.parse(s));
+      if (subOrArgs(tok.kind)) aprm.prisuf.add(AspPrimarySuffix.parse(s));
 			else {break;}
     }
 
@@ -39,11 +38,15 @@ class AspPrimary extends AspSyntax {
       ant.prettyPrint();
     }
 	}
-}
 
-  // @Override
-  public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-    //-- Must be changed in part 3:
-    return null;
-  }
+	public static boolean subOrArgs(TokenKind tk) {
+		return tk == leftParToken || tk == leftBracketToken;
+	}
+
+	// @Override
+	public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+		//-- Must be changed in part 3:
+		return null;
+	}
+
 }

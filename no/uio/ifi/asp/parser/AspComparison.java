@@ -8,8 +8,8 @@ import static no.uio.ifi.asp.scanner.TokenKind.*;
 class AspComparison extends AspSyntax {
   ArrayList<AspTerm> terms = new ArrayList<>();
   ArrayList<AspCompOpr> ops = new ArrayList<>();
-	//ASK FOR HELP:
-	//skal listen inneholde [term comp term comp term] eller [term term term] med en ekstra liste med [comp comp comp] i seg?
+  //ASK FOR HELP:
+  //skal listen inneholde [term comp term comp term] eller [term term term] med en ekstra liste med [comp comp comp] i seg?
 
 
   public AspComparison(int n) {
@@ -18,35 +18,41 @@ class AspComparison extends AspSyntax {
 
   static AspComparison parse(Scanner s) {
     enterParser("comparison");
-    System.out.println("comparison");
-   AspComparison acmp = new AspComparison(s.curLineNum());
-   while (true) {
-     acmp.terms.add(AspTerm.parse(s));
-          Token tok = s.curToken();
+    AspComparison acmp = new AspComparison(s.curLineNum());
+    while (true) {
+      acmp.terms.add(AspTerm.parse(s));
+      Token tok = s.curToken();
 
-     if (tok.kind == greaterToken ) acmp.ops.add(new AspCompOpr (tok));
-           else if (tok.kind == lessToken) acmp.ops.add(new AspCompOpr (tok));
-           else if (tok.kind == doubleEqualToken) acmp.ops.add(new AspCompOpr (tok));
-           else if (tok.kind == lessEqualToken) acmp.ops.add(new AspCompOpr (tok));
-           else if (tok.kind == greaterEqualToken) acmp.ops.add(new AspCompOpr (tok));
-           else if (tok.kind == notEqualToken) acmp.ops.add(new AspCompOpr (tok));
-           else {break;}
-           s.readNextToken();
-   }
+      if (anyCompOpr(tok.kind)) acmp.ops.add(AspCompOpr.parse(s));
+      else {break;}
+      //s.readNextToken();
+    }
 
-   leaveParser("comparison");
-   return acmp;
+    leaveParser("comparison");
+    return acmp;
   }
 
-	@Override
+  @Override
   void prettyPrint() {
     int nPrinted = 0;
 
     for (AspTerm ant: terms) {
-			ant.prettyPrint(); ++nPrinted;
-      if (nPrinted > 0)
-      	Main.log.prettyWrite(ops.get(nPrinted-1).tok.toString());
+      if (nPrinted > 0) {
+        Main.log.prettyWrite(" ");
+        ops.get(nPrinted-1).prettyPrint();
+        Main.log.prettyWrite(" ");
+      }
+      ant.prettyPrint();
+      nPrinted++;
     }
+  }
+
+  public static boolean anyCompOpr(TokenKind tk) {
+    if (tk == greaterToken || tk == lessToken || tk == doubleEqualToken || tk == lessEqualToken
+    || tk == greaterEqualToken || tk == notEqualToken) {
+      return true;
+    }
+    return false;
   }
 
 

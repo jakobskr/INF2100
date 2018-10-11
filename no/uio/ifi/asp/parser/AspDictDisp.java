@@ -1,6 +1,7 @@
 package no.uio.ifi.asp.parser;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
@@ -17,7 +18,7 @@ class AspDictDisplay extends AspAtom {
   }
 
   static AspDictDisplay parse(Scanner s) {
-    enterParser("arguments");
+    enterParser("dict display");
     AspDictDisplay adict = new AspDictDisplay(s.curLineNum());
 		skip(s, leftBraceToken);
 
@@ -37,20 +38,34 @@ class AspDictDisplay extends AspAtom {
     }
 
 		skip(s, rightBraceToken);
-    leaveParser("arguments");
+    leaveParser("dict display");
     return adict;
   }
 
   @Override
+  //This method needs some heavy duty testing after we manage to compile our project
   void prettyPrint() {
     int nPrinted = 0;
 		Main.log.prettyWrite("{");
-		for (AspString ant: exps) {
+		/*for (AspString ant: exps) {
       if (nPrinted > 0)
       Main.log.prettyWrite(", ");
       ant.prettyPrint(); ++nPrinted;
 			Main.log.prettyWrite(":");
 			exps.get(ant).prettyPrint();
+    }*/
+
+    for(Map.Entry<AspString, AspExpr> entry : exps.entrySet()) {
+      if (nPrinted > 0)
+      Main.log.prettyWrite(", ");
+
+      AspString astr = entry.getKey();
+      astr.prettyPrint();
+      Main.log.prettyWrite(":");
+      AspExpr aexp = entry.getValue();
+      aexp.prettyPrint();
+      nPrinted++;
     }
+    Main.log.prettyWrite("}");
   }
 }

@@ -13,7 +13,7 @@ public class AspBool extends AspAtom {
     }
 
     public static AspBool parse(Scanner s) {
-        enterParser("Boolean");
+        enterParser("boolean literal");
     AspBool abol = new AspBool(s.curLineNum());
 
     Token temp = s.curToken();
@@ -26,7 +26,7 @@ public class AspBool extends AspAtom {
 		}
     skip(s, trueToken, falseToken);
 
-    leaveParser("Bool");
+    leaveParser("boolean literal");
     return abol;
     }
 

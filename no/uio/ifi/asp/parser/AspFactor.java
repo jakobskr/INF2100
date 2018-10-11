@@ -26,35 +26,18 @@ class AspFactor extends AspSyntax {
     while (true) {
 
 			Token tok = s.curToken();
-			if (tok.kind == plusToken ) {
-        afct.prefs.add(new AspFactorPrefix(tok));
-        skip(s, tok.kind);
+      if (anyFactorPrefix(tok.kind)) {
+        afct.prefs.add(AspFactorPrefix.parse(s));
       }
-			else if (tok.kind == minusToken ) {
-        afct.prefs.add(new AspFactorPrefix(tok));
-        skip(s, tok.kind);
-      }
+
 			else {
-        afct.prefs.add(new AspFactorPrefix(null));
+        afct.prefs.add(null);
       }
 
       afct.prims.add(AspPrimary.parse(s));
       tok = s.curToken();
-      if (tok.kind == slashToken) {
-        afct.factop.add(new AspFactorOpr(tok));
-        skip(s,tok.kind);
-      }
-			else if (tok.kind == doubleSlashToken) {
-        afct.factop.add(new AspFactorOpr(tok));
-        skip(s, tok.kind);
-      }
-      else if (tok.kind == astToken) {
-        afct.factop.add(new AspFactorOpr(tok));
-        skip(s, tok.kind);
-      }
-      else if (tok.kind == percentToken) {
-        afct.factop.add(new AspFactorOpr(tok));
-        skip(s, tok.kind);
+      if (anyFactorOpr(tok.kind)) {
+        afct.factop.add(AspFactorOpr.parse(s));
       }
 			else {break;}
     }
@@ -63,17 +46,38 @@ class AspFactor extends AspSyntax {
     return afct;
   }
 
+
+  //add this to the parse method for easy acess of something i guess
+  public static boolean anyFactorPrefix(TokenKind tk) {
+    if (tk == plusToken || tk == minusToken) {
+      return true;
+
+
+    }
+    return false;
+  }
+
+  public static boolean anyFactorOpr(TokenKind tk) {
+    if (tk == slashToken || tk == doubleSlashToken || tk == astToken || tk == percentToken) {
+      return true;
+    }
+    return false;
+  }
+
   @Override
   void prettyPrint() {
     int nPrinted = 0;
 
     for (AspPrimary p: prims) {
-      if (nPrinted > 0)
-      Main.log.prettyWrite(factop.get(nPrinted-1).tok.toString());
-			if(prims(nPrinted).tok != null){
-				Main.log.prettyWrite(prims(nPrinted).tok.toString());
+      if (nPrinted > 0) {
+        Main.log.prettyWrite(" ");
+        factop.get(nPrinted-1).prettyPrint();
+        Main.log.prettyWrite(" ");
+      }
+			if(prefs.get(nPrinted) != null){
+				prefs.get(nPrinted).prettyPrint();
 			}
-      prims.prettyPrint(); ++nPrinted;
+      p.prettyPrint(); ++nPrinted;
     }
   }
 

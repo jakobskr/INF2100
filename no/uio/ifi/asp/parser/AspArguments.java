@@ -30,7 +30,6 @@ class AspArguments extends AspPrimarySuffix {
   }
 
   static AspArguments parse(Scanner s) {
-    enterParser("primary suffix");
     enterParser("arguments");
 
     AspArguments aarg = new AspArguments(s.curLineNum());
@@ -53,7 +52,6 @@ class AspArguments extends AspPrimarySuffix {
 
 		skip(s, rightParToken);
     leaveParser("arguments");
-    leaveParser("primary suffix");
     return aarg;
   }
 
@@ -62,7 +60,7 @@ class AspArguments extends AspPrimarySuffix {
 		int nPrinted = 0;
 		Main.log.prettyWrite("(");
 		for (AspExpr ant: exps) {
-			if (nPrinted > 0);
+			if (nPrinted > 0)
 			Main.log.prettyWrite(", ");
 			ant.prettyPrint(); ++nPrinted;
 		}
