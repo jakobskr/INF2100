@@ -58,15 +58,15 @@ class AspArguments extends AspPrimarySuffix {
   }
 
 	@Override
-	void prettyPrint() {
+	public void prettyPrint() {
 		int nPrinted = 0;
-		Main.log.prettyWrite("(")
+		Main.log.prettyWrite("(");
 		for (AspExpr ant: exps) {
-			if (nPrinted > 0)
+			if (nPrinted > 0);
 			Main.log.prettyWrite(", ");
 			ant.prettyPrint(); ++nPrinted;
 		}
-		Main.log.prettyWrite(")")
+		Main.log.prettyWrite(")");
 	}
 
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {

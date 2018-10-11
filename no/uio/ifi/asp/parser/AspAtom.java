@@ -5,7 +5,7 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
-public class AspAtom extends AspSyntax {
+public abstract class AspAtom extends AspSyntax {
 
 	public AspAtom(int n) {
 		super(n);
@@ -62,9 +62,7 @@ public class AspAtom extends AspSyntax {
 	}
 
 	@Override
-	void prettyPrint() {
-		atom.prettyPrint()
-	}
+	abstract void prettyPrint();
 
 	RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     return null;

@@ -27,7 +27,7 @@ public class AspInt extends AspAtom {
     }
 
     public void prettyPrint() {
-    	Main.log.prettyWrite(value);
+    	Main.log.prettyWrite(value.toString());
   }
 
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {

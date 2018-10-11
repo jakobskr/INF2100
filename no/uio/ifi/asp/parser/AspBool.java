@@ -39,11 +39,8 @@ public class AspBool extends AspAtom {
 				Main.log.prettyWrite("false");
 			}
 		}
-  }
 
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     return null;
-  }
-
-
+    }
 }

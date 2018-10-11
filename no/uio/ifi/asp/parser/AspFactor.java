@@ -69,9 +69,9 @@ class AspFactor extends AspSyntax {
 
     for (AspPrimary p: prims) {
       if (nPrinted > 0)
-      main.log.prettyWrite(factop.get(nPrinted-1).tok.toString());
+      Main.log.prettyWrite(factop.get(nPrinted-1).tok.toString());
 			if(prims(nPrinted).tok != null){
-				main.log.prettyWrite(prims(nPrinted).tok.toString());
+				Main.log.prettyWrite(prims(nPrinted).tok.toString());
 			}
       prims.prettyPrint(); ++nPrinted;
     }

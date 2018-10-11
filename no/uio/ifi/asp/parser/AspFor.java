@@ -30,11 +30,11 @@ class AspFor extends AspStmt{
 	}
 	@Override
   void prettyPrint() {
-    main.log.prettyWrite("for");
+    Main.log.prettyWrite("for");
 		name.prettyPrint();
-		main.log.prettyWrite("in");
+		Main.log.prettyWrite("in");
 		exp.prettyPrint();
-		main.log.prettywrite(":");
+		Main.log.prettywrite(":");
 		sut.prettyPrint();
   }
 

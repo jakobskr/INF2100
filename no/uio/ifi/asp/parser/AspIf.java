@@ -7,8 +7,8 @@ import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 class AspIf extends AspStmt {
   ArrayList<AspExpr> exps = new ArrayList<>();
-	ArrayList<AspSuite> sut = new ArrayList<>();
-	AspSuite elsut = null;
+  ArrayList<AspSuite> sut = new ArrayList<>();
+  AspSuite elsut = null;
 
   AspIf(int n) {
     super(n);
@@ -19,16 +19,16 @@ class AspIf extends AspStmt {
 
     AspIf asif = new AspIf(s.curLineNum());
 
-		skip(s, ifToken);
+    skip(s, ifToken);
 
     while (true) {
       System.out.println("xd");
-			asif.exps.add(AspExpr.parse(s));
-			skip(s,colonToken);
-			asif.sut.add(AspSuite.parse(s));
+      asif.exps.add(AspExpr.parse(s));
+      skip(s,colonToken);
+      asif.sut.add(AspSuite.parse(s));
 
-			TokenKind temp = s.curToken().kind;
-			if (temp == elifToken ) skip (s , elifToken);
+      TokenKind temp = s.curToken().kind;
+      if (temp == elifToken ) skip (s , elifToken);
 
       else {
         break;
@@ -36,11 +36,11 @@ class AspIf extends AspStmt {
 
     }
 
-		if (s.curToken().kind == elseToken){
-			skip(s,elseToken);
-			skip(s,colonToken);
-			asif.elsut = AspSuite.parse(s);
-		}
+    if (s.curToken().kind == elseToken){
+      skip(s,elseToken);
+      skip(s,colonToken);
+      asif.elsut = AspSuite.parse(s);
+    }
 
     leaveParser("if stmt");
     return asif;
@@ -54,17 +54,19 @@ class AspIf extends AspStmt {
   @Override
   void prettyPrint() {
     int nPrinted = 0;
-		Main.log.prettyWrite("if ");
+    Main.log.prettyWrite("if ");
     for (AspExpr ant: exps) {
       if (nPrinted > 0)
-			ant.prettyPrint();
+      ant.prettyPrint();
       Main.log.prettyWrite(": ");
-			sut.get(nPrinted).prettyPrint();
-			++nPrinted;
-		if (elsut != null){
-			Main.log.prettyWrite("else: ");
-			elsut.prettyPrint();
-		}
+      sut.get(nPrinted).prettyPrint();
+      ++nPrinted;
+      if (elsut != null){
+        Main.log.prettyWrite("else: ");
+        elsut.prettyPrint();
+      }
+    }
+
   }
 
 }
