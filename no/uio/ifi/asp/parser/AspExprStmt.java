@@ -29,8 +29,8 @@ public class AspExprStmt extends AspStmt {
 
   @Override
   void prettyPrint() {
-    Main.log.prettyWriteLn();
     expr.prettyPrint();
+		Main.log.prettyWriteLn();
 
   }
 

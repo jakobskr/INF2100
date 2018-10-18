@@ -53,21 +53,24 @@ class AspIf extends AspStmt {
 
   @Override
   void prettyPrint() {
-    Main.log.prettyWriteLn();
     int nPrinted = 0;
     Main.log.prettyWrite("if ");
     for (AspExpr ant: exps) {
-      if (nPrinted > 0)
+      if (nPrinted > 0){
+
+				Main.log.prettyWrite("elif ");
+			}
       ant.prettyPrint();
       Main.log.prettyWrite(": ");
       sut.get(nPrinted).prettyPrint();
       ++nPrinted;
-      if (elsut != null){
-        Main.log.prettyWrite("else: ");
-        Main.log.prettyWriteLn();
-        elsut.prettyPrint();
-      }
+
     }
+		if (elsut != null){
+
+			Main.log.prettyWrite("else: ");
+			elsut.prettyPrint();
+		}
 
   }
 
