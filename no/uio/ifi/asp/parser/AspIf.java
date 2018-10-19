@@ -30,7 +30,6 @@ class AspIf extends AspStmt {
     skip(s, ifToken);
 
     while (true) {
-      System.out.println("xd");
       asif.exps.add(AspExpr.parse(s));
       skip(s,colonToken);
       asif.sut.add(AspSuite.parse(s));

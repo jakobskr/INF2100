@@ -82,7 +82,6 @@ public class Main {
 
   //PART 2:
   private static void doTestParser(Scanner s) {
-    //System.out.println("vi kommer her daddy");
     AspProgram prog = AspProgram.parse(s);
     prog.prettyPrint();
   }

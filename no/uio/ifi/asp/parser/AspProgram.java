@@ -27,7 +27,6 @@ public class AspProgram extends AspSyntax {
       //-- Must be changed in part 2:
       ap.stmts.add(AspStmt.parse(s));
       //AspName.parse(s);
-      System.out.println(s.curToken());
       // s.readNextToken();
     }
 

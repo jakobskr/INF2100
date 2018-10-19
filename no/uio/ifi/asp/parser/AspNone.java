@@ -20,9 +20,7 @@ public class AspNone extends AspAtom {
 
     public static AspNone parse(Scanner s) {
     enterParser("none");
-    System.out.println("Nuns be gucci");
     AspNone anon = new AspNone(s.curLineNum());
-
     Token temp = s.curToken();
 
     skip(s, noneToken);

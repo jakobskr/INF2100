@@ -35,7 +35,6 @@ public class AspExpr extends AspSyntax {
       if (s.curToken().kind != orToken) break;
       skip(s, orToken);
     }
-
     leaveParser("expr");
     return expr;
   }

@@ -27,7 +27,6 @@ public abstract class AspStmt extends AspSyntax {
 		}
 
 		else if (tok.kind == ifToken) {
-			System.out.println("hello hello hello");
 			astm = AspIf.parse(s);
 		}
 

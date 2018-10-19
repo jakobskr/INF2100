@@ -30,8 +30,6 @@ public class AspExprStmt extends AspStmt {
     AspExprStmt aes = new AspExprStmt(s.curLineNum());
 
     aes.expr = AspExpr.parse(s);
-
-    System.out.println(s.curToken().showInfo());
     skip(s,newLineToken);
 
     leaveParser("expr stmt");
