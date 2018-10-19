@@ -5,6 +5,12 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+/**
+ * the none literal
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 public class AspNone extends AspAtom {
 
     public AspNone(int n) {
@@ -25,6 +31,9 @@ public class AspNone extends AspAtom {
     return anon;
     }
 
+    /**
+    * converts the syntax tree back to a readable asp program.
+    */
     public void prettyPrint() {
     	Main.log.prettyWrite("none");
   }

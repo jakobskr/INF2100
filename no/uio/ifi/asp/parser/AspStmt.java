@@ -4,7 +4,12 @@ import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
-
+/**
+ * abstract super class for the different statements
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 public abstract class AspStmt extends AspSyntax {
 
 	public AspStmt(int n) {

@@ -5,6 +5,12 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+/**
+ * contains 1-n statements
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 class AspSuite extends AspSyntax{
 	ArrayList<AspStmt> stms = new ArrayList<>();
 
@@ -36,6 +42,9 @@ class AspSuite extends AspSyntax{
     return null;
   }
 
+	/**
+	* converts the syntax tree back to a readable asp program.
+	*/
 	public void prettyPrint() {
 		Main.log.prettyWriteLn();
 		Main.log.prettyIndent();

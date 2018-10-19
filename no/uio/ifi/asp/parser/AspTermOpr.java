@@ -4,7 +4,12 @@ import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
-
+/**
+ * the termOpr literal
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 public class AspTermOpr extends AspSyntax{
   public Token tok;
 
@@ -38,6 +43,9 @@ public class AspTermOpr extends AspSyntax{
 
 
   @Override
+  /**
+	* converts the syntax tree back to a readable asp program.
+	*/
   void prettyPrint() {
     Main.log.prettyWrite(tok.kind.toString());
   }

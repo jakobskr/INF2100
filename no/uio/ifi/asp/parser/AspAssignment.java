@@ -23,6 +23,11 @@ class AspAssignment extends AspStmt {
     super(n);
   }
 
+	/**
+	 * parses AspAssignment
+	 * @param  Scanner s             AspScanner
+	 * @return itself
+	 */
 	static AspAssignment parse(Scanner s) {
 		enterParser("assignment");
 		AspAssignment aass = new AspAssignment(s.curLineNum());
@@ -45,6 +50,9 @@ class AspAssignment extends AspStmt {
 		return null;
 	}
 
+	/**
+   * converts the syntax tree back to a readable asp program.
+   */
 	@Override
   void prettyPrint() {
 

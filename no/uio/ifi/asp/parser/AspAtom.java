@@ -4,13 +4,25 @@ import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
-
+/**
+ * An abstract superclass for all the literals
+ *
+ *
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 public abstract class AspAtom extends AspSyntax {
 
 	public AspAtom(int n) {
 		super(n);
 	}
 
+	/**
+	 * checks with literal we have to parse
+	 * @param  Scanner s             [description]
+	 * @return         [description]
+	 */
 	static AspAtom parse(Scanner s) {
 		enterParser("atom");
     AspAtom atom = null;
@@ -61,6 +73,9 @@ public abstract class AspAtom extends AspSyntax {
     return atom;
 	}
 
+	/**
+	 * converts the syntax tree back to a readable asp program.
+	 */
 	@Override
 	abstract void prettyPrint();
 

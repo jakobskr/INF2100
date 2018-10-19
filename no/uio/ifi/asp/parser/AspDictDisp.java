@@ -7,16 +7,24 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+/**
+ * contains 0-n <string literal, expr> tuples
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 class AspDictDisplay extends AspAtom {
   HashMap<AspString, AspExpr> exps = new HashMap<AspString, AspExpr>();
-
-	//ASK FOR HELP:
-	//skal listen inneholde [term comp term comp term] eller [term term term] med en ekstra liste med [comp comp comp] i seg?
 
   AspDictDisplay(int n) {
     super(n);
   }
 
+  /**
+   * parses the asp DictDisplay
+   * @param  Scanner s             [description]
+   * @return         [description]
+   */
   static AspDictDisplay parse(Scanner s) {
     enterParser("dict display");
     AspDictDisplay adict = new AspDictDisplay(s.curLineNum());
@@ -43,17 +51,12 @@ class AspDictDisplay extends AspAtom {
   }
 
   @Override
-  //This method needs some heavy duty testing after we manage to compile our project
+  /**
+   * converts the syntax tree back to a readable asp program.
+   */
   void prettyPrint() {
     int nPrinted = 0;
 		Main.log.prettyWrite("{");
-		/*for (AspString ant: exps) {
-      if (nPrinted > 0)
-      Main.log.prettyWrite(", ");
-      ant.prettyPrint(); ++nPrinted;
-			Main.log.prettyWrite(":");
-			exps.get(ant).prettyPrint();
-    }*/
 
     for(Map.Entry<AspString, AspExpr> entry : exps.entrySet()) {
       if (nPrinted > 0)

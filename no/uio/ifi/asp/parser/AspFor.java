@@ -5,6 +5,13 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+/**
+ * Contains a name. an expression and then a suite
+ *
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 class AspFor extends AspStmt{
 	AspSuite sut;
 	AspName name;
@@ -28,6 +35,10 @@ class AspFor extends AspStmt{
 		return afor;
 
 	}
+
+	/**
+	* converts the syntax tree back to a readable asp program.
+	*/
 	@Override
   void prettyPrint() {
 		Main.log.prettyWriteLn();

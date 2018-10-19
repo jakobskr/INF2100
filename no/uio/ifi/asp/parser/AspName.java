@@ -5,6 +5,13 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+/**
+ * the name literal
+ *
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 public class AspName extends AspAtom {
   String name;
 
@@ -25,6 +32,9 @@ public class AspName extends AspAtom {
     return anam;
 	}
 
+  /**
+  * converts the syntax tree back to a readable asp program.
+  */
 	public void prettyPrint() {
     Main.log.prettyWrite(name);
   }

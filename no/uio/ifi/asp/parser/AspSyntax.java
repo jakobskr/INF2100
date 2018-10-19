@@ -4,13 +4,18 @@ import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 
+/**
+ * the abstract supercall which everyone inherits from
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 public abstract class AspSyntax {
   public int lineNum;
 
   AspSyntax(int n) {
     lineNum = n;
   }
-
 
   abstract void prettyPrint();
   abstract RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue;

@@ -5,13 +5,15 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+/**
+ * contains 1-n factors and 0-(n-1) compoprs
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 class AspTerm extends AspSyntax {
   ArrayList<AspFactor> factors = new ArrayList<>();
 	ArrayList<AspTermOpr> ops = new ArrayList<>();
-
-	//ASK FOR HELP:
-	//skal listen inneholde [term comp term comp term] eller [term term term] med en ekstra liste med [comp comp comp] i seg?
-
 
   AspTerm(int n) {
     super(n);
@@ -33,6 +35,9 @@ class AspTerm extends AspSyntax {
   }
 
   @Override
+  /**
+	* converts the syntax tree back to a readable asp program.
+	*/
   void prettyPrint() {
     int nPrinted = 0;
 
@@ -46,6 +51,11 @@ class AspTerm extends AspSyntax {
     }
   }
 
+  /**
+   * checks if the given token is a termopr
+   * @param  TokenKind tk            [description]
+   * @return           [description]
+   */
   public static boolean anyTermOpr(TokenKind tk) {
     if (tk == plusToken || tk == minusToken) {
       return true;

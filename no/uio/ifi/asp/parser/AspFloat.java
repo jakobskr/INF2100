@@ -5,6 +5,12 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+/**
+ * the float literal
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 public class AspFloat extends AspAtom {
   double value;
 
@@ -25,6 +31,9 @@ public class AspFloat extends AspAtom {
     return aflt;
     }
 
+    /**
+    * converts the syntax tree back to a readable asp program.
+    */
     public void prettyPrint() {
 	    Main.log.prettyWrite(Double.toString(value));
   }

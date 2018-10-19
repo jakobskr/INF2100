@@ -5,6 +5,13 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+
+/**
+ * the return statement
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 public class AspReturn extends AspStmt {
 
   AspExpr expr;
@@ -24,6 +31,9 @@ public class AspReturn extends AspStmt {
   }
 
   @Override
+  /**
+	* converts the syntax tree back to a readable asp program.
+	*/
   void prettyPrint() {
     Main.log.prettyWrite("return ");
 		expr.prettyPrint();

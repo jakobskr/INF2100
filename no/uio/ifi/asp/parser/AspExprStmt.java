@@ -4,7 +4,13 @@ import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
-
+/**
+ * Contains an AspExpr
+ *
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 public class AspExprStmt extends AspStmt {
 
   AspExpr expr;
@@ -13,6 +19,11 @@ public class AspExprStmt extends AspStmt {
     super(n);
   }
 
+  /**
+   * parser the AspExprStmt
+   * @param  Scanner s             AspScanner
+   * @return         [description]
+   */
   public static AspExprStmt parse(Scanner s) {
     enterParser("expr stmt");
 
@@ -27,6 +38,9 @@ public class AspExprStmt extends AspStmt {
     return aes;
   }
 
+  /**
+  * converts the syntax tree back to a readable asp program.
+  */
   @Override
   void prettyPrint() {
     expr.prettyPrint();

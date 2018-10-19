@@ -6,10 +6,8 @@ import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 
-
 /**
- * Reads a line from an .asp sourcefile and generates a list of asp tokens
- *
+ * Contains 1-n AspNotTests.
  *
  * @author jakobskr
  * @author Sigurson
@@ -22,6 +20,11 @@ class AspAndTest extends AspSyntax {
     super(n);
   }
 
+  /**
+   * Parses the AspAndTest
+   * @param  Scanner s             the scanner
+   * @return returns the parsed AspAndTest
+   */
   static AspAndTest parse(Scanner s) {
     enterParser("and test");
 
@@ -36,6 +39,9 @@ class AspAndTest extends AspSyntax {
     return aat;
   }
 
+  /**
+   * converts the syntax tree back to a readable asp program.
+   */
   @Override
   void prettyPrint() {
     int nPrinted = 0;

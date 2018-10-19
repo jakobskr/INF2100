@@ -20,15 +20,15 @@ class AspArguments extends AspPrimarySuffix {
   ArrayList<AspExpr> exps = new ArrayList<>();
 
 
-
-	//ASK FOR HELP:
-	//skal listen inneholde [term comp term comp term] eller [term term term] med en ekstra liste med [comp comp comp] i seg?
-
-
   AspArguments(int n) {
     super(n);
   }
 
+  /**
+   * parses the argument token read by the scanner
+   * @param  Scanner s             AspScanner
+   * @return itself
+   */
   static AspArguments parse(Scanner s) {
     enterParser("arguments");
 
@@ -55,6 +55,9 @@ class AspArguments extends AspPrimarySuffix {
     return aarg;
   }
 
+  /**
+   * converts the syntax tree back to a readable asp program.
+   */
 	@Override
 	public void prettyPrint() {
 		int nPrinted = 0;

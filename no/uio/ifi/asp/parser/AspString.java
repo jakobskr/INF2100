@@ -4,7 +4,12 @@ import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
-
+/**
+ * the string literal
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 public class AspString extends AspAtom {
   String value;
 
@@ -23,6 +28,9 @@ public class AspString extends AspAtom {
     return astr;
     }
 
+    /**
+    * converts the syntax tree back to a readable asp program.
+    */
     public void prettyPrint() {
 	    Main.log.prettyWrite("\"" + value + "\"");
   }

@@ -5,6 +5,13 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+/**
+ * Contains an expression
+ *
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 class AspInnerExpression extends AspAtom {
   AspExpr exps;
 
@@ -30,6 +37,9 @@ class AspInnerExpression extends AspAtom {
   }
 
   @Override
+  /**
+	* converts the syntax tree back to a readable asp program.
+	*/
   void prettyPrint() {
     Main.log.prettyWrite("(");
     exps.prettyPrint();

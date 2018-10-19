@@ -5,6 +5,12 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+/**
+ * contains 1 comparison and 0-1 nots
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 public class AspNotTest extends AspSyntax {
 
   AspComparison comp;
@@ -32,6 +38,9 @@ public class AspNotTest extends AspSyntax {
   }
 
   @Override
+  /**
+  * converts the syntax tree back to a readable asp program.
+  */
   void prettyPrint() {
     if(notto){
 			Main.log.prettyWrite("not ");

@@ -5,6 +5,13 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+
+/**
+ * the factoropr
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 public class AspFactorOpr extends AspSyntax{
   public Token tok;
 
@@ -48,7 +55,9 @@ public class AspFactorOpr extends AspSyntax{
      return "AspFactorOpr: "+ tok;
   }
 
-
+  /**
+  * converts the syntax tree back to a readable asp program.
+  */
   @Override
   void prettyPrint() {
     int nPrinted = 0;

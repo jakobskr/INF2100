@@ -7,7 +7,7 @@ import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 public class Main {
-  public static final String version = "2018-09-27";
+  public static final String version = "2018-10-19";
   public static final String authors = "Jakobskr/Sigurson";
   public static LogFile log = null;
 
@@ -76,9 +76,6 @@ public class Main {
   private static void doTestScanner(Scanner s) {
     do {
       s.readNextToken();
-      //System.out.println(s.curToken().showInfo());
-      //System.out.println("xdd");
-
     } while (s.curToken().kind != eofToken);
   }
 
@@ -87,7 +84,6 @@ public class Main {
   private static void doTestParser(Scanner s) {
     //System.out.println("vi kommer her daddy");
     AspProgram prog = AspProgram.parse(s);
-    System.out.println("daddddddddy lemme hav dat");
     prog.prettyPrint();
   }
 

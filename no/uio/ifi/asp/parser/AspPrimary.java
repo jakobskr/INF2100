@@ -5,12 +5,15 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+/**
+ * contains 1 atom, then 0-n primary suffix
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 class AspPrimary extends AspSyntax {
 	ArrayList<AspPrimarySuffix> prisuf = new ArrayList<>();
   AspAtom atom;
-	//ASK FOR HELP:
-	//skal listen inneholde [term comp term comp term] eller [term term term] med en ekstra liste med [comp comp comp] i seg?
-
   AspPrimary(int n) {
     super(n);
   }
@@ -32,6 +35,10 @@ class AspPrimary extends AspSyntax {
   }
 
   // @Override
+
+	/**
+	* converts the syntax tree back to a readable asp program.
+	*/
   void prettyPrint() {
 		atom.prettyPrint();
     for (AspPrimarySuffix ant: prisuf) {
@@ -39,6 +46,11 @@ class AspPrimary extends AspSyntax {
     }
 	}
 
+	/**
+	 * checs if we are reading a subscription or arguments
+	 * @param  TokenKind tk            [description]
+	 * @return           [description]
+	 */
 	public static boolean subOrArgs(TokenKind tk) {
 		return tk == leftParToken || tk == leftBracketToken;
 	}

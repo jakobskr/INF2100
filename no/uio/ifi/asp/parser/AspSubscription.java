@@ -5,11 +5,14 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+/**
+ * contains 1 expression
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 class AspSubscription extends AspPrimarySuffix {
   AspExpr exps = null;
-	//ASK FOR HELP:
-	//skal listen inneholde [term comp term comp term] eller [term term term] med en ekstra liste med [comp comp comp] i seg?
-
 
   AspSubscription(int n) {
     super(n);
@@ -33,6 +36,9 @@ class AspSubscription extends AspPrimarySuffix {
   }
 
   @Override
+  /**
+  * converts the syntax tree back to a readable asp program.
+  */
   void prettyPrint() {
     Main.log.prettyWrite("[");
 		exps.prettyPrint();

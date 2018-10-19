@@ -5,6 +5,9 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+/**
+ * the compOpr literal
+ */
 public class AspCompOpr extends AspSyntax{
   public Token tok;
 
@@ -14,6 +17,11 @@ public class AspCompOpr extends AspSyntax{
     super(n);
   }
 
+  /**
+   * parses the compOpr
+   * @param  Scanner s             scanner s
+   * @return         [description]
+   */
   public static AspCompOpr parse(Scanner s) {
     enterParser("comp opr");
     AspCompOpr afop = new AspCompOpr(s.curLineNum());
@@ -61,7 +69,10 @@ public class AspCompOpr extends AspSyntax{
   }
 
 
-  @Override
+  /**
+   * converts the syntax tree back to a readable asp program.
+   */
+   @Override
   void prettyPrint() {
     int nPrinted = 0;
     Main.log.prettyWrite(tok.kind.toString());

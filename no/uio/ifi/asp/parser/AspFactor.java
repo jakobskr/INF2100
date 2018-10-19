@@ -5,14 +5,18 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+
+/**
+ * Contains an 1-n primaries, 0-x factoropr and 0-y factor prefixess
+ *
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 class AspFactor extends AspSyntax {
   ArrayList<AspPrimary> prims = new ArrayList<>();
 	ArrayList<AspFactorPrefix> prefs = new ArrayList<>();
 	ArrayList<AspFactorOpr> factop = new ArrayList<>();
-
-
-	//ASK FOR HELP:
-	//skal listen inneholde [term comp term comp term] eller [term term term] med en ekstra liste med [comp comp comp] i seg?
 
 
   AspFactor(int n) {
@@ -47,7 +51,11 @@ class AspFactor extends AspSyntax {
   }
 
 
-  //add this to the parse method for easy acess of something i guess
+  /**
+   * checks if the given token is a factor prefix
+   * @param  TokenKind tk
+   * @return
+   */
   public static boolean anyFactorPrefix(TokenKind tk) {
     if (tk == plusToken || tk == minusToken) {
       return true;
@@ -64,6 +72,10 @@ class AspFactor extends AspSyntax {
     return false;
   }
 
+
+  /**
+  * converts the syntax tree back to a readable asp program.
+  */
   @Override
   void prettyPrint() {
     int nPrinted = 0;

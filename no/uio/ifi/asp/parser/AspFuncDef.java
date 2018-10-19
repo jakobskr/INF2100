@@ -5,6 +5,14 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+
+/**
+ * Contains a name. then 0-n names, and then a suite
+ *
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 class AspFuncDef extends AspStmt {
   ArrayList<AspName> names = new ArrayList<>();
 	AspSuite sut = null;
@@ -49,6 +57,9 @@ class AspFuncDef extends AspStmt {
     return null;
   }
 
+  /**
+	* converts the syntax tree back to a readable asp program.
+	*/
   @Override
   void prettyPrint() {
     int nPrinted = 0;

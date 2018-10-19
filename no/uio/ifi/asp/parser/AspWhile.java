@@ -4,6 +4,12 @@ import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
+/**
+ * contains 1 expression then 1 suite
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 
 class AspWhile extends AspStmt{
 	AspSuite sut;
@@ -28,6 +34,9 @@ class AspWhile extends AspStmt{
 
 	}
 	@Override
+	/**
+	* converts the syntax tree back to a readable asp program.
+	*/
   void prettyPrint() {
 		Main.log.prettyWriteLn();
   	Main.log.prettyWrite("while");

@@ -4,7 +4,13 @@ import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
-
+/**
+ * the int literal
+ *
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 public class AspInt extends AspAtom {
   long value;
 
@@ -26,6 +32,10 @@ public class AspInt extends AspAtom {
     return aint;
     }
 
+
+    /**
+    * converts the syntax tree back to a readable asp program.
+    */
     public void prettyPrint() {
     	Main.log.prettyWrite(Long.toString(value));
   }

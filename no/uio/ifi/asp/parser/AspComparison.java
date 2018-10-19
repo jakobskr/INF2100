@@ -5,17 +5,27 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+
+/**
+ * Asp comparison  contains 1-n terms, and 0 to n-1 term oprs
+ *
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 class AspComparison extends AspSyntax {
   ArrayList<AspTerm> terms = new ArrayList<>();
   ArrayList<AspCompOpr> ops = new ArrayList<>();
-  //ASK FOR HELP:
-  //skal listen inneholde [term comp term comp term] eller [term term term] med en ekstra liste med [comp comp comp] i seg?
-
 
   public AspComparison(int n) {
     super(n);
   }
 
+  /**
+   * parser the comparisons
+   * @param  Scanner s             [description]
+   * @return         [description]
+   */
   static AspComparison parse(Scanner s) {
     enterParser("comparison");
     AspComparison acmp = new AspComparison(s.curLineNum());
@@ -32,6 +42,10 @@ class AspComparison extends AspSyntax {
     return acmp;
   }
 
+
+  /**
+   * converts the syntax tree back to a readable asp program.
+   */
   @Override
   void prettyPrint() {
     int nPrinted = 0;
@@ -47,6 +61,11 @@ class AspComparison extends AspSyntax {
     }
   }
 
+  /**
+   * checks if the given token is a valid compOpr token
+   * @param  TokenKind tk            [description]
+   * @return           [description]
+   */
   public static boolean anyCompOpr(TokenKind tk) {
     if (tk == greaterToken || tk == lessToken || tk == doubleEqualToken || tk == lessEqualToken
     || tk == greaterEqualToken || tk == notEqualToken) {

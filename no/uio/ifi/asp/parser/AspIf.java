@@ -5,6 +5,14 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+
+/**
+ * Contains a contains 1-n tuples of <expr,suite>
+ *
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 class AspIf extends AspStmt {
   ArrayList<AspExpr> exps = new ArrayList<>();
   ArrayList<AspSuite> sut = new ArrayList<>();
@@ -52,6 +60,9 @@ class AspIf extends AspStmt {
   }
 
   @Override
+  /**
+	* converts the syntax tree back to a readable asp program.
+	*/
   void prettyPrint() {
     int nPrinted = 0;
     Main.log.prettyWrite("if ");

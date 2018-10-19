@@ -5,12 +5,15 @@ import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
+
+/**
+ * contains 0-n expressions
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 class AspListDisp extends AspAtom {
   ArrayList<AspExpr> exps = new ArrayList<>();
-
-	//ASK FOR HELP:
-	//skal listen inneholde [term comp term comp term] eller [term term term] med en ekstra liste med [comp comp comp] i seg?
-
 
   AspListDisp(int n) {
     super(n);
@@ -39,6 +42,9 @@ class AspListDisp extends AspAtom {
     return alst;
   }
 
+  /**
+  * converts the syntax tree back to a readable asp program.
+  */
   @Override
   void prettyPrint() {
     int nPrinted = 0;
