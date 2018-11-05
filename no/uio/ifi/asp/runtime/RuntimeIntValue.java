@@ -4,13 +4,17 @@ import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.parser.AspSyntax;
 
 public class RuntimeIntValue extends RuntimeValue {
-  int intValue;
+  long intValue;
 
 
-  public RuntimeIntValue(int v) {
+  public RuntimeIntValue(long v) {
     intValue = v;
   }
 
+  @Override
+  public String toString() {
+    return Long.toString(intValue);
+  }
 
   @Override
   protected String typeName() {
@@ -18,7 +22,7 @@ public class RuntimeIntValue extends RuntimeValue {
   }
 
   @Override
-  public int getIntValue(String what, AspSyntax where) {
+  public long getIntValue(String what, AspSyntax where) {
     return intValue;
   }
 
@@ -105,7 +109,7 @@ public class RuntimeIntValue extends RuntimeValue {
     }
 
     else if (v instanceof RuntimeIntValue) {
-      return new RuntimeIntValue(Math.floor(intValue / v.getIntValue("interger", where)));
+      return new RuntimeIntValue((long) Math.floor(intValue / v.getIntValue("integer", where)));
     }
 
     runtimeError("'/' undefined for "+typeName()+"!", where);
@@ -166,17 +170,14 @@ public class RuntimeIntValue extends RuntimeValue {
 	  return null;  // Required by the compiler!
   }
 
-  @Override
-  public String toString() {
-    return Integer.toString(intValue);
-  }
+
 
   public RuntimeValue evalNegate(AspSyntax where) {
     return new RuntimeIntValue(intValue * -1);
   }
 
   @Override
-  public RuntimeValue evalEqual(RuntimeValue v, AspSyntax where) {
+  public RuntimeValue evalNotEqual(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeNoneValue) {
       return new RuntimeBoolValue(true);
     }
