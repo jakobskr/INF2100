@@ -94,4 +94,52 @@ public class RuntimeFloatValue extends RuntimeValue {
 		return null;
 	}
 
+	public RuntimeValue evalLessEqual (RuntimeValue v, AspSyntax where){
+		if (v instanceof RuntimeFloatValue ){
+			return  new RuntimeBoolValue(this.floatValue <= v.getFloatValue("float",where));
+		}
+		else if (v instanceof RuntimeIntValue){
+			return  new RuntimeBoolValue(this.floatValue <= v.getIntValue("float",where));
+		}
+		else{
+			runtimeError("Type error: "+ v +" of " + v.typeName() + " cannot be compared to float!", where);
+		}
+		return null;
+	}
+
+	public RuntimeValue evalNot (RuntimeValue v, AspSyntax where){
+		if (v instanceof RuntimeFloatValue ){
+			return  new RuntimeBoolValue(this.floatValue == 0.0);
+		}
+		else{
+			runtimeError("Type error: "+ v +" of " + v.typeName() + " cannot be compared to float!", where);
+		}
+		return null;
+	}
+
+	public RuntimeValue evalEqual (RuntimeValue v, AspSyntax where){
+		if (v instanceof RuntimeFloatValue ){
+			return  new RuntimeBoolValue(this.floatValue == v.getFloatValue("float",where));
+		}
+		else if (v instanceof RuntimeIntValue){
+			return  new RuntimeBoolValue(this.floatValue == v.getIntValue("float",where));
+		}
+		else{
+			runtimeError("Type error: "+ v +" of " + v.typeName() + " cannot be compared to float!", where);
+		}
+		return null;
+	}
+
+	public RuntimeValue evalModulo (RuntimeValue v, AspSyntax where){
+		if (v instanceof RuntimeFloatValue ){
+			return  new RuntimeFloatValue(this.floatValue -  v.getFloatValue("float",where) * math.floor(this.floatValue / v.getFloatValue("float",where)));
+		}
+		else if (v instanceof RuntimeIntValue){
+			return  new RuntimeFloatValue(this.floatValue -  v.getFloatValue("float",where) * math.floor(this.floatValue / v.getFloatValue("float",where)));
+		}
+		else{
+			runtimeError("Type error: "+ v +" of " + v.typeName() + " cannot be compared to float!", where);
+		}
+		return null;
+	}
 }
