@@ -59,6 +59,6 @@ public class AspBool extends AspAtom {
 		}
 
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-    return null;
+      return null; //required by the compiler
     }
 }
