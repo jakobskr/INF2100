@@ -130,8 +130,9 @@ public class RuntimeStringValue extends RuntimeValue {
   }
 
   public RuntimeValue evalSubscription(RuntimeValue v, AspSyntax where) {
-	  if (v instanceof int) {
-
+	  if (v instanceof RuntimeValue) {
+      return null;
     }
+    return null;
   }
 }
