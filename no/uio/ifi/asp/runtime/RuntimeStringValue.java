@@ -29,7 +29,7 @@ public class RuntimeStringValue extends RuntimeValue {
 
   public RuntimeValue evalAdd(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeStringValue) {
-      return new RuntimeStringValue(value + v.getStringValue("string", where));
+      return new RuntimeStringValue(value + v.getStringValue("+ operand ", where));
     }
 
     runtimeError("Type error for +", where);
@@ -43,7 +43,7 @@ public class RuntimeStringValue extends RuntimeValue {
     }
 
     if (v instanceof RuntimeStringValue) {
-      return new RuntimeBoolValue(value.equals(v.getStringValue("string", where)));
+      return new RuntimeBoolValue(value.equals(v.getStringValue("== operand", where)));
     }
 
     runtimeError("Type error for ==.", where);
@@ -54,7 +54,7 @@ public class RuntimeStringValue extends RuntimeValue {
   public RuntimeValue evalGreater(RuntimeValue v, AspSyntax where) {
 
     if (v instanceof RuntimeStringValue) {
-      return new RuntimeBoolValue(value.compareTo(v.getStringValue("string", where)) > 0 );
+      return new RuntimeBoolValue(value.compareTo(v.getStringValue("< operand", where)) > 0 );
     }
 
     runtimeError("Type error for <.", where);
@@ -65,10 +65,10 @@ public class RuntimeStringValue extends RuntimeValue {
   public RuntimeValue evalGreaterEqual(RuntimeValue v, AspSyntax where) {
 
     if (v instanceof RuntimeStringValue) {
-      return new RuntimeBoolValue(value.compareTo(v.getStringValue("string", where)) >= 0 );
+      return new RuntimeBoolValue(value.compareTo(v.getStringValue("<= operand", where)) >= 0 );
     }
 
-    runtimeError("Type error for <.", where);
+    runtimeError("Type error for <=.", where);
     return null;  // Required by the compiler
   }
 
@@ -80,10 +80,10 @@ public class RuntimeStringValue extends RuntimeValue {
   public RuntimeValue evalLess(RuntimeValue v, AspSyntax where) {
 
     if (v instanceof RuntimeStringValue) {
-      return new RuntimeBoolValue(value.compareTo(v.getStringValue("string", where)) < 0 );
+      return new RuntimeBoolValue(value.compareTo(v.getStringValue("> operand", where)) < 0 );
     }
 
-    runtimeError("Type error for <.", where);
+    runtimeError("Type error for >.", where);
     return null;  // Required by the compiler
   }
 
@@ -91,23 +91,23 @@ public class RuntimeStringValue extends RuntimeValue {
   public RuntimeValue evalLessEqual(RuntimeValue v, AspSyntax where) {
 
     if (v instanceof RuntimeStringValue) {
-      return new RuntimeBoolValue(value.compareTo(v.getStringValue("string", where)) <= 0 );
+      return new RuntimeBoolValue(value.compareTo(v.getStringValue(">= operand", where)) <= 0 );
     }
 
-    runtimeError("Type error for <.", where);
+    runtimeError("Type error for >=.", where);
     return null;  // Required by the compiler
   }
 
   public RuntimeValue evalMultiply(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeIntValue) {
       String ret = "";
-      for (int i = 0; i < v.getIntValue("integer",where) ;i++ ) {
+      for (int i = 0; i < v.getIntValue("* operand",where) ;i++ ) {
         ret = ret + ret;
       }
       return new RuntimeStringValue(ret);
     }
 
-    runtimeError("Type error for +", where);
+    runtimeError("Type error for *", where);
     return null;
   }
 
@@ -122,7 +122,7 @@ public class RuntimeStringValue extends RuntimeValue {
     }
 
     if (v instanceof RuntimeStringValue) {
-      return new RuntimeBoolValue(!(value.equals(v.getStringValue("string", where))));
+      return new RuntimeBoolValue(!(value.equals(v.getStringValue("!= operand", where))));
     }
 
     runtimeError("Type error for !=.", where);
@@ -133,6 +133,7 @@ public class RuntimeStringValue extends RuntimeValue {
 	  if (v instanceof RuntimeValue) {
       return null;
     }
-    return null;
+    runtimeError("Type error for [].", where);
+    return null;  // Required by the compiler
   }
 }
