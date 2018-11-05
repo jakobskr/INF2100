@@ -18,7 +18,7 @@ public class RuntimeIntValue extends RuntimeValue {
   }
 
   @Override
-  public boolean getIntValue(String what, AspSyntax where) {
+  public int getIntValue(String what, AspSyntax where) {
     return intValue;
   }
 

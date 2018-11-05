@@ -18,6 +18,11 @@ public class RuntimeStringValue extends RuntimeValue {
     return value;
   }
 
+  public Boolean getBoolValue(String what, AspSyntax where) {
+    return value;
+  }
+
+
   public RuntimeValue evalAdd(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeStringValue) {
       return new RuntimeStringValue(value + v.getStringValue("string", where));
@@ -26,4 +31,7 @@ public class RuntimeStringValue extends RuntimeValue {
     runtimeError("Type error for +", where);
     return null;
   }
+
+
+
 }
