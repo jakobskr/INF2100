@@ -57,9 +57,9 @@ public class RuntimeListValue extends RuntimeValue{
 	}
 
 	public RuntimeValue evalMultiply(RuntimeValue v, AspSyntax where){
-		RuntimeListValue newlist = new RuntimeListValue(new ArrayList<RuntimeValue>());
+		RuntimeValue newlist = new RuntimeListValue(new ArrayList<RuntimeValue>());
 		for (int x = 0; x < v.getIntValue("mul", where) ; x++ ) {
-			newlist.evalAdd(this, where);
+			newlist = newlist.evalAdd(this, where);
 		}
 		return newlist;
 	}
