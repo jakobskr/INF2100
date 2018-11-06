@@ -25,7 +25,7 @@ public class RuntimeListValue extends RuntimeValue{
 			tmp = tmp + val.toString();
 			ct ++;
 		}
-		return tmp;
+		return tmp + "]";
   }
 
 	public RuntimeValue evalSubscription(RuntimeValue v, AspSyntax where){
