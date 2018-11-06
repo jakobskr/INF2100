@@ -30,6 +30,10 @@ public class RuntimeListValue extends RuntimeValue{
 
 	public RuntimeValue evalSubscript(RuntimeValue v, AspSyntax where){
 		if(v instanceof RuntimeIntValue){
+			if (v.getIntValue() > this.listvalue.size() || v.getIntValue() < 0){
+				runtimeError("index out of bounds", where);
+				return null;
+			}
 			return this.listvalue.get((int) v.getIntValue("index" ,where));
 		}
 		runtimeError("index can only be int", where);

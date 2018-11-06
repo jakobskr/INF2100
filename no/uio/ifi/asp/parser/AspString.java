@@ -36,7 +36,7 @@ public class AspString extends AspAtom {
   }
 
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-    return null;
+    return new RuntimeStringValue(this.value);
   }
 
 

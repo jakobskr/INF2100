@@ -41,7 +41,7 @@ public class AspInt extends AspAtom {
   }
 
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-    return null;
+    return new RuntimeIntValue(this.value);
   }
 
 

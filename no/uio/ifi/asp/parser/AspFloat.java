@@ -39,7 +39,7 @@ public class AspFloat extends AspAtom {
   }
 
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-    return null;
+    return new RuntimeFloatValue(this.value);
   }
 
 
