@@ -77,6 +77,61 @@ class AspComparison extends AspSyntax {
 
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     RuntimeValue v = terms.get(0).eval(curScope);
-    return null;
+    RuntimeValue ret = v;
+    for (int i = 1; i < terms.size() ; i++) {
+
+      switch (ops.get(i - 1).tok.kind) {
+
+        case greaterToken: {
+          if (!v.evalGreater(terms.get(i).eval(curScope), this).getBoolValue("compOpr",this)) {
+            return new RuntimeBoolValue(false);
+          }
+          v = terms.get(i).eval(curScope);
+          break;
+        }
+
+        case greaterEqualToken: {
+          if (!v.evalGreaterEqual(terms.get(i).eval(curScope), this).getBoolValue("compOpr",this)) {
+            return new RuntimeBoolValue(false);
+          }
+          v = terms.get(i).eval(curScope);
+          break;
+        }
+
+        case lessToken: {
+          if (!v.evalLess(terms.get(i).eval(curScope), this).getBoolValue("compOpr",this)) {
+            return new RuntimeBoolValue(false);
+          }
+          v = terms.get(i).eval(curScope);
+          break;
+        }
+
+        case lessEqualToken: {
+          if (!v.evalLessEqual(terms.get(i).eval(curScope), this).getBoolValue("compOpr",this)) {
+            return new RuntimeBoolValue(false);
+          }
+          v = terms.get(i).eval(curScope);
+          break;
+        }
+
+        case equalToken: {
+          if (!v.evalEqual(terms.get(i).eval(curScope), this).getBoolValue("compOpr",this)) {
+            return new RuntimeBoolValue(false);
+          }
+          v = terms.get(i).eval(curScope);
+          break;
+        }
+
+        case notEqualToken: {
+          if (!v.evalNotEqual(terms.get(i).eval(curScope), this).getBoolValue("compOpr",this)) {
+            return new RuntimeBoolValue(false);
+          }
+          v = terms.get(i).eval(curScope);
+          break;
+        }
+      }
+    }
+    return ret;
   }
+
 }
