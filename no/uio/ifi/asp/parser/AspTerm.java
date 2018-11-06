@@ -64,7 +64,15 @@ class AspTerm extends AspSyntax {
   }
 
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-    //-- Must be changed in part 3:
-    return null;
+    RuntimeValue v = factors.get(0).eval(curScope);
+    for (int i = 1; i < factors.size() ; i++) {
+      if (ops.get(i - 1).tok.kind == plusToken) {
+        v = v.evalAdd(factors.get(i).eval(curScope), this);
+      }
+      else if (ops.get(i - 1).tok.kind == minusToken) {
+        v = v.evalSubtract(factors.get(i).eval(curScope), this);
+      }
+    }
+    return v;
   }
 }
