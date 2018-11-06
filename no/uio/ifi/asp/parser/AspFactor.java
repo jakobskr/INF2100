@@ -97,8 +97,10 @@ class AspFactor extends AspSyntax {
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
 		int ct = 0;
 		RuntimeValue v = prims.get(0).eval(curScope);
-		if(prefs.get(0).tok.kind == minusToken){
-			v = v.evalNegate(this);
+		if(prefs.get(0) != null){
+			if(prefs.get(0).tok.kind == minusToken){
+				v = v.evalNegate(this);
+			}
 		}
 		RuntimeValue val = new RuntimeIntValue(0);
     for (int x = 1; x < prims.size(); x++) {
