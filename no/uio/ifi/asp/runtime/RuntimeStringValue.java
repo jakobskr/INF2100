@@ -111,8 +111,8 @@ public class RuntimeStringValue extends RuntimeValue {
     return null;
   }
 
-  public boolean evalNot(RuntimeValue v, AspSyntax where) {
-    return (value.equals(""));
+  public RuntimeValue evalNot(RuntimeValue v, AspSyntax where) {
+    return new RuntimeBoolValue(value.equals(""));
   }
 
   @Override

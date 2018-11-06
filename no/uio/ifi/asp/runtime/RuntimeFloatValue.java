@@ -189,8 +189,4 @@ public class RuntimeFloatValue extends RuntimeValue {
 		}
 		return null;
 	}
-
-	
-
-
 }
