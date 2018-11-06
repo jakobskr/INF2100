@@ -102,7 +102,7 @@ public class RuntimeStringValue extends RuntimeValue {
     if (v instanceof RuntimeIntValue) {
       String ret = "";
       for (int i = 0; i < v.getIntValue("* operand",where) ;i++ ) {
-        ret = ret + ret;
+        ret = ret + value;
       }
       return new RuntimeStringValue(ret);
     }
