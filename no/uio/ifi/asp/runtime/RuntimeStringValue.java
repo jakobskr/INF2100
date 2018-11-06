@@ -11,7 +11,7 @@ public class RuntimeStringValue extends RuntimeValue {
   }
 
   public String toString(){
-    return value;
+    return "'"  + value + "'";
   }
 
   public String typeName() {
