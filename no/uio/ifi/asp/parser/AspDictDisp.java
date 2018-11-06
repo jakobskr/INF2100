@@ -71,4 +71,12 @@ class AspDictDisplay extends AspAtom {
     }
     Main.log.prettyWrite("}");
   }
+
+	RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+		HashMap<String,RuntimeValue> h = new HashMap<String,RuntimeValue>();
+		for (AspString s : exps.keySet()) {
+			h.put(s.value, exps.get(s).eval(curScope));
+		}
+    return new RuntimeDictValue(h);
+  }
 }
