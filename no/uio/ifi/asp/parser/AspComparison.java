@@ -76,7 +76,7 @@ class AspComparison extends AspSyntax {
 
 
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-    //-- Must be changed in part 3:
+    RuntimeValue v = terms.get(0).eval(curScope);
     return null;
   }
 }
