@@ -106,7 +106,7 @@ class AspFactor extends AspSyntax {
     for (int x = 1; x < prims.size(); x++) {
 				val = prims.get(x).eval(curScope);
 			if(prefs.get(0) != null){
-				if(prefs.get(x).tok.kind == minusToken){
+				if(prefs.get(0).tok.kind == minusToken){
 					val = val.evalNegate(this);
 				}
 			}
