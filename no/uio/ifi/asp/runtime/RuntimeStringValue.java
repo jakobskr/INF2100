@@ -132,7 +132,7 @@ public class RuntimeStringValue extends RuntimeValue {
   public RuntimeValue evalSubscription(RuntimeValue v, AspSyntax where) {
 	  if (v instanceof RuntimeIntValue) {
       if (0 <= v.getIntValue("index", where) && v.getIntValue("index", where)  < value.length()) {
-        return new RuntimeStringValue(value.substring((int) v.getIntValue("index",where),(int) v.getIntValue("index",where)));
+        return new RuntimeStringValue(value.substring((int) v.getIntValue("index",where),(int) v.getIntValue("index",where) + 1));
       }
       else {
         runtimeError(String.format("String index %d out of range",v.getIntValue("index",where)), where);
