@@ -87,6 +87,7 @@ class AspComparison extends AspSyntax {
             return new RuntimeBoolValue(false);
           }
           v = terms.get(i).eval(curScope);
+          ret = new RuntimeBoolValue(true);
           break;
         }
 
@@ -95,6 +96,8 @@ class AspComparison extends AspSyntax {
             return new RuntimeBoolValue(false);
           }
           v = terms.get(i).eval(curScope);
+          ret = new RuntimeBoolValue(true);
+
           break;
         }
 
@@ -103,7 +106,9 @@ class AspComparison extends AspSyntax {
             return new RuntimeBoolValue(false);
           }
           v = terms.get(i).eval(curScope);
+          ret = new RuntimeBoolValue(true);
           break;
+
         }
 
         case lessEqualToken: {
@@ -111,6 +116,7 @@ class AspComparison extends AspSyntax {
             return new RuntimeBoolValue(false);
           }
           v = terms.get(i).eval(curScope);
+          ret = new RuntimeBoolValue(true);
           break;
         }
 
@@ -119,6 +125,7 @@ class AspComparison extends AspSyntax {
             return new RuntimeBoolValue(false);
           }
           v = terms.get(i).eval(curScope);
+          ret = new RuntimeBoolValue(true);
           break;
         }
 
@@ -127,6 +134,7 @@ class AspComparison extends AspSyntax {
             return new RuntimeBoolValue(false);
           }
           v = terms.get(i).eval(curScope);
+          ret = new RuntimeBoolValue(true);
           break;
         }
       }

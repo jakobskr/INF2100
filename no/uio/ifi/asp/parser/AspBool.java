@@ -51,10 +51,10 @@ public class AspBool extends AspAtom {
 		@Override
 		void prettyPrint() {
 			if(value){
-				Main.log.prettyWrite("true");
+				Main.log.prettyWrite("True");
 			}
 			else{
-				Main.log.prettyWrite("false");
+				Main.log.prettyWrite("False");
 			}
 		}
 
