@@ -147,7 +147,7 @@ public class RuntimeFloatValue extends RuntimeValue {
 		return new RuntimeFloatValue(this.floatValue);
 	}
 
-	public RuntimeValue evalNegate(RuntimeValue v, AspSyntax where){
+	public RuntimeValue evalNegate(AspSyntax where){
 		return new RuntimeFloatValue(-this.floatValue);
 	}
 

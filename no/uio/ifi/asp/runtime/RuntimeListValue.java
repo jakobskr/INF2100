@@ -28,7 +28,7 @@ public class RuntimeListValue extends RuntimeValue{
 		return tmp;
   }
 
-	public RuntimeValue evalSubscript(RuntimeValue v, AspSyntax where){
+	public RuntimeValue evalSubscription(RuntimeValue v, AspSyntax where){
 		if(v instanceof RuntimeIntValue){
 			if (v.getIntValue("index", where) > this.listvalue.size() || v.getIntValue("index", where) < 0){
 				runtimeError("index out of bounds", where);
@@ -56,11 +56,19 @@ public class RuntimeListValue extends RuntimeValue{
 		return null;
 	}
 
-	public RuntimeBoolValue getBoolValue(){
-		if( this.listvalue.size() > 0){
-			return new RuntimeBoolValue(false);
+	public RuntimeValue evalMultiply(RuntimeIntValue v, AspSyntax where){
+		RuntimeListValue newlist = new RuntimeListValue(new ArrayList<RuntimeValue>());
+		for (int x = 0; x < v.getIntValue("mul", where) ; x++ ) {
+			newlist.evalAdd(this, where);
 		}
-		return new RuntimeBoolValue(true);
+		return newlist;
+	}
+
+	public boolean getBoolValue(){
+		if( this.listvalue.size() > 0){
+			return false;
+		}
+		return true;
 	}
 
 
