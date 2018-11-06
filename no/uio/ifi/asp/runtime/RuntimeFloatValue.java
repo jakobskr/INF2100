@@ -135,7 +135,7 @@ public class RuntimeFloatValue extends RuntimeValue {
 			return  new RuntimeFloatValue(this.floatValue -  v.getFloatValue("float",where) * Math.floor(this.floatValue / v.getFloatValue("float",where)));
 		}
 		else if (v instanceof RuntimeIntValue){
-			return  new RuntimeFloatValue(this.floatValue -  v.getFloatValue("float",where) * Math.floor(this.floatValue / v.getFloatValue("float",where)));
+			return  new RuntimeFloatValue(this.floatValue -  v.getIntValue("float",where) * Math.floor(this.floatValue / v.getIntValue("float",where)));
 		}
 		else{
 			runtimeError("Type error: "+ v +" of " + v.typeName() + " cannot be compared to float!", where);
@@ -156,7 +156,20 @@ public class RuntimeFloatValue extends RuntimeValue {
 			return  new RuntimeFloatValue(this.floatValue / v.getFloatValue("float",where));
 		}
 		else if (v instanceof RuntimeIntValue){
-			return  new RuntimeFloatValue(this.floatValue /  v.getFloatValue("float",where));
+			return  new RuntimeFloatValue(this.floatValue /  v.getIntValue("float",where));
+		}
+		else{
+			runtimeError("Type error: "+ v +" of " + v.typeName() + " cannot be compared to float!", where);
+		}
+		return null;
+	}
+
+	public RuntimeValue evalIntDivide(RuntimeValue v, AspSyntax where){
+		if (v instanceof RuntimeFloatValue ){
+			return  new RuntimeFloatValue(Math.floor(this.floatValue / v.getFloatValue("float",where)));
+		}
+		else if (v instanceof RuntimeIntValue){
+			return  new RuntimeFloatValue(Math.floor(this.floatValue /  v.getIntValue("float",where)));
 		}
 		else{
 			runtimeError("Type error: "+ v +" of " + v.typeName() + " cannot be compared to float!", where);

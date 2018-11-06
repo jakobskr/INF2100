@@ -95,7 +95,37 @@ class AspFactor extends AspSyntax {
 
   // @Override
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-    //-- Must be changed in part 3:
-    return null;
+		int ct = 0;
+		RuntimeValue v = prims.get(0).eval(curScope);
+		if(prefs.get(0).tok.kind == minusToken){
+			v = v.evalNegate(this);
+		}
+		RuntimeValue val = new RuntimeIntValue(0);
+    for (int x = 1; x < prims.size(); x++) {
+				val = prims.get(x).eval(curScope);
+			if(prefs.get(x).tok.kind == minusToken){
+				val = val.evalNegate(this);
+			}
+			switch(factop.get(x).tok.kind){
+				case doubleSlashToken :{
+					v = v.evalIntDivide(val,this);
+					break;
+				}
+
+				case astToken :{
+					v = v.evalMultiply(val,this);
+					break;
+				}
+				case slashToken :{
+					v = v.evalDivide(val,this);
+					break;
+				}
+				case percentToken :{
+					v = v.evalModulo(val,this);
+					break;
+				}
+			}
+    }
+    return v;
   }
 }
