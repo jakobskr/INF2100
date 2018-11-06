@@ -110,7 +110,7 @@ class AspFactor extends AspSyntax {
 					val = val.evalNegate(this);
 				}
 			}
-			switch(factop.get(x).tok.kind){
+			switch(factop.get(x-1).tok.kind){
 				case doubleSlashToken :{
 					v = v.evalIntDivide(val,this);
 					break;
