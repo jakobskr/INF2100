@@ -21,7 +21,7 @@ public class RuntimeListValue extends RuntimeValue{
     String tmp = "[";
 		int ct = 0;
 		for(RuntimeValue val: listvalue){
-			if(ct > 0){tmp = tmp + ",";}
+			if(ct > 0){tmp = tmp + ", ";}
 			tmp = tmp + val.toString();
 			ct ++;
 		}
