@@ -16,6 +16,19 @@ public class RuntimeDictValue extends RuntimeValue {
     return dict.size() > 0;
   }
 
+  public String toString() {
+    String ret = "{";
+    int c = 0;
+    for (String key: dict.keySet()) {
+      if (c > 0) {
+        ret += ", ";
+      }
+      ret += "'" + key + "'" + ": " + dict.get(key).toString();
+      c++;
+    }
+    return ret += "}";
+  }
+
   public String typeName() {
     return "Dict";
   }
