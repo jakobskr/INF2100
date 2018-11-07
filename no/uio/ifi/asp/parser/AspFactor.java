@@ -104,9 +104,9 @@ class AspFactor extends AspSyntax {
 		}
 		RuntimeValue val = new RuntimeIntValue(0);
     for (int x = 1; x < prims.size(); x++) {
-				val = prims.get(x).eval(curScope);
-			if(prefs.get(0) != null){
-				if(prefs.get(0).tok.kind == minusToken){
+			val = prims.get(x).eval(curScope);
+			if(prefs.get(x) != null){
+				if(prefs.get(x).tok.kind == minusToken){
 					val = val.evalNegate(this);
 				}
 			}
