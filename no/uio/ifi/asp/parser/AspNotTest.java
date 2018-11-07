@@ -48,7 +48,12 @@ public class AspNotTest extends AspSyntax {
 		comp.prettyPrint();
   }
 
-  // @Override
+  /**
+   * evaluates a comparison and negates it if it is required.
+   * @param  curScope            current scope
+   * @return                    RuntimeValue
+   * @throws RuntimeReturnValue [description]
+   */
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     RuntimeValue v = comp.eval(curScope);
     if (notto) {

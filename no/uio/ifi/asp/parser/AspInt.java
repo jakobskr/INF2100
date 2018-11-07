@@ -39,7 +39,12 @@ public class AspInt extends AspAtom {
     public void prettyPrint() {
     	Main.log.prettyWrite(Long.toString(value));
   }
-
+	/**
+	 * returns a RuntimeIntValue
+	 * @param  curScope            current scope
+	 * @return                    RuntimeIntValue
+	 * @throws RuntimeReturnValue -
+	 */
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     return new RuntimeIntValue(this.value);
   }

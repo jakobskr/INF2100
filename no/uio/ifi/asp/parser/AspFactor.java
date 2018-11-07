@@ -93,7 +93,15 @@ class AspFactor extends AspSyntax {
     }
   }
 
-  // @Override
+  /**
+   * factor eval evaluates the expressions repressented by the AspPrimary, AspFactorOpr and AspFactorPrefixes stored after parsing
+   * first a primary gets evaluated, then negated if a negation preceeded it.
+   * the next primary (if one exists) gets evaluated and potentially negated.
+   * the token repressenting the operation between the primaries is used to switch between various mathematical operations.
+   * @param  curScope           current scope
+   * @return                    RuntimeFloatValue or RuntimeIntValue
+   * @throws RuntimeReturnValue -
+   */
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
 		int ct = 0;
 		RuntimeValue v = prims.get(0).eval(curScope);

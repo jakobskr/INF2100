@@ -38,6 +38,12 @@ public class AspFloat extends AspAtom {
 	    Main.log.prettyWrite(Double.toString(value));
   }
 
+	/**
+	 * returns a RuntimeFloatValue with an apropriate float inside
+	 * @param  curScope           current scope
+	 * @return                    RuntimeFloatValue
+	 * @throws RuntimeReturnValue -
+	 */
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     return new RuntimeFloatValue(this.value);
   }

@@ -55,7 +55,12 @@ public class AspFactorPrefix extends AspSyntax{
     Main.log.prettyWrite(tok.kind.toString());
   }
 
-  // @Override
+  /**
+   * see AspFactorOpr.eval for a proper description of why this has no proper return value
+   * @param  curScope           current scope
+   * @return                    -
+   * @throws RuntimeReturnValue -
+   */
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     //-- Must be changed in part 3:
     return null;

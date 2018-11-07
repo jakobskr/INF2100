@@ -79,6 +79,12 @@ public abstract class AspAtom extends AspSyntax {
 	@Override
 	abstract void prettyPrint();
 
+	/**
+	 * atom is abstract and the eval method is not to be used.
+	 * @param  curScope           current scope
+	 * @return                    -
+	 * @throws RuntimeReturnValue -
+	 */
 	RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     return null;
   }

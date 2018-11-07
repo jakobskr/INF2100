@@ -53,6 +53,12 @@ public class AspExpr extends AspSyntax {
     }
   }
 
+	/**
+	 * eval evaluates al underlying AspAndTests
+	 * @param  curScope           current scope
+	 * @return                    RuntimeValue
+	 * @throws RuntimeReturnValue -
+	 */
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     RuntimeValue v = andTests.get(0).eval(curScope);
     for (int i = 1;i < andTests.size() ; i++ ) {

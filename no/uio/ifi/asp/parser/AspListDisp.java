@@ -57,6 +57,13 @@ class AspListDisp extends AspAtom {
 		Main.log.prettyWrite("]");
   }
 
+	/**
+	 * builds a RuntimeListValue from evaluations of expressions held in exps
+	 *
+	 * @param  curScope           current scope
+	 * @return                    RuntimeListValue
+	 * @throws RuntimeReturnValue -
+	 */
 	RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
 		ArrayList<RuntimeValue> p = new ArrayList<RuntimeValue>();
 		for (AspExpr e : exps ) {

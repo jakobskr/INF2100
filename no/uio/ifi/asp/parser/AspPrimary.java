@@ -55,7 +55,13 @@ class AspPrimary extends AspSyntax {
 		return tk == leftParToken || tk == leftBracketToken;
 	}
 
-	// @Override
+	/**
+	 * primary evaluates to the eval of the atom inside, except if it contains a subscription.
+	 * if it does it returns the evalSubscription instead. if there are multiple subscriptions this is repeated.
+	 * @param  curScope            current scope
+	 * @return                    RuntimeValue
+	 * @throws RuntimeReturnValue -
+	 */
 	public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
 		//-- Must be changed in part 3:
 		RuntimeValue v = atom.eval(curScope);

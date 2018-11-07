@@ -74,7 +74,12 @@ class AspComparison extends AspSyntax {
     return false;
   }
 
-
+	/**
+	 * comparison evaluates to a boolean value dependant on the comparisons the tokens repressent.
+	 * @param  curScope           current scope
+	 * @return                    RuntimeBoolValue
+	 * @throws RuntimeReturnValue -
+	 */
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     RuntimeValue v = terms.get(0).eval(curScope);
     RuntimeValue ret = v;

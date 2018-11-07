@@ -58,6 +58,12 @@ public class AspBool extends AspAtom {
 			}
 		}
 
+		/**
+		 * eval returns a RuntimeBoolValue with a coresponding value to the stored boolean in the variable value
+		 * @param  curScope           current scope
+		 * @return                    RuntimeBoolValue
+		 * @throws RuntimeReturnValue -
+		 */
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
       return new RuntimeBoolValue(this.value);
     }

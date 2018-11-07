@@ -64,7 +64,13 @@ public class AspFactorOpr extends AspSyntax{
     Main.log.prettyWrite(tok.kind.toString());
   }
 
-  // @Override
+  /**
+   * is implemented in an outside in aproach, like an ogre, but you dont peel it and just look at it from a distance.
+   * you just look at the factor operator and go "yup, that's an operator" instead of actually asking it.
+   * @param  curScope           current scope
+   * @return                    -
+   * @throws RuntimeReturnValue -
+   */
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     //-- Must be changed in part 3:
     return null;

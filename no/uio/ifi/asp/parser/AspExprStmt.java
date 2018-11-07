@@ -46,7 +46,12 @@ public class AspExprStmt extends AspStmt {
 
   }
 
-  // @Override
+  /**
+   * evaluates the delicious statement held within
+   * @param  curScope           current scope
+   * @return                    RuntimeValue from evaluation of expr
+   * @throws RuntimeReturnValue -
+   */
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     return expr.eval(curScope);
   }

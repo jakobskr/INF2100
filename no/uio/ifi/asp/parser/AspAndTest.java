@@ -53,7 +53,12 @@ class AspAndTest extends AspSyntax {
     }
   }
 
-  // @Override
+  /**
+   * AndTest evaluates all stored not tests to check for an and test
+   * @param  curScope           current scope
+   * @return                    returns RuntimeBoolValue or RuntimeValue
+   * @throws RuntimeReturnValue [description]
+   */
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     RuntimeValue v = notTests.get(0).eval(curScope);
     for (int i = 1; i < notTests.size() ; i++) {

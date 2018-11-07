@@ -34,7 +34,12 @@ public class AspString extends AspAtom {
     public void prettyPrint() {
 	    Main.log.prettyWrite("\"" + value + "\"");
   }
-
+	/**
+	 * string evaluates to a RuntimeStringValue
+	 * @param  curScope           current scope
+	 * @return                    RuntimeStringValue
+	 * @throws RuntimeReturnValue -
+	 */
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     return new RuntimeStringValue(this.value);
   }
