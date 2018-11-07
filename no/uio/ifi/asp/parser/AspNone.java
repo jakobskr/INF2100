@@ -36,6 +36,12 @@ public class AspNone extends AspAtom {
     	Main.log.prettyWrite("none");
   }
 
+	/**
+	 * returns a RuntimeNoneValue object
+	 * @param  curScope            current scope
+	 * @return                    RuntimeNoneValue
+	 * @throws RuntimeReturnValue -
+	 */
   RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     return new RuntimeNoneValue();
   }

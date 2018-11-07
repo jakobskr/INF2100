@@ -63,6 +63,13 @@ class AspTerm extends AspSyntax {
     return false;
   }
 
+
+	/**
+	 * term evaluates + and - expressions
+	 * @param  curScope           current scope
+	 * @return                    RuntimeValue
+	 * @throws RuntimeReturnValue -
+	 */
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     RuntimeValue v = factors.get(0).eval(curScope);
     for (int i = 1; i < factors.size() ; i++) {

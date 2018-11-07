@@ -46,6 +46,12 @@ class AspInnerExpression extends AspAtom {
     Main.log.prettyWrite(")");
   }
 
+	/**
+	 * inner expression evaluates the underlying expression and returns the result
+	 * @param  curScope           current scope
+	 * @return                    RuntimeValue
+	 * @throws RuntimeReturnValue -
+	 */
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     return exps.eval(curScope);
   }
