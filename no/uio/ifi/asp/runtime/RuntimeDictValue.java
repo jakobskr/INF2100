@@ -4,6 +4,12 @@ import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.parser.AspSyntax;
 import java.util.HashMap;
 
+/**
+ * The RuntimeDictvalue
+ * @author jakobskr
+ * @author Sigurson
+ * @version dato
+ */
 public class RuntimeDictValue extends RuntimeValue {
   HashMap<String, RuntimeValue> dict;
 
@@ -12,10 +18,19 @@ public class RuntimeDictValue extends RuntimeValue {
     dict = v;
   }
 
+  /**
+   * gets the boolean value of the dict
+   * @param  String    what          what called the method
+   * @param  AspSyntax where         where the method was called
+   * @return           [description]
+   */
   public boolean getBoolValue(String what, AspSyntax where) {
     return dict.size() > 0;
   }
 
+  /**
+   * returns the dict as a string
+   */
   public String toString() {
     String ret = "{";
     int c = 0;
@@ -29,14 +44,28 @@ public class RuntimeDictValue extends RuntimeValue {
     return ret += "}";
   }
 
+  /**
+   * returns the typename of dict
+   */
   public String typeName() {
     return "Dict";
   }
 
+  /**
+   * returns the value of not this
+   * @param  AspSyntax where         where the method was called
+   * @return           RuntimeBoolValue
+   */
   public RuntimeValue evalNot(AspSyntax where) {
     return new RuntimeBoolValue(!(dict.size() > 0));
   }
 
+  /**
+   * returns the value of this[v]
+   * @param  RuntimeValue v             value of index
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeValue
+   */
   public RuntimeValue evalSubscription(RuntimeValue v, AspSyntax where) {
 	  if (v instanceof RuntimeStringValue) {
       if (dict.containsKey(v.getStringValue("key", where))) {
@@ -49,6 +78,19 @@ public class RuntimeDictValue extends RuntimeValue {
     }
     runtimeError("Dict Key must be a text String.", where);
     return null;  // Required by the compiler
+  }
+
+  /**
+   * adds a value to the dict
+   * @param RuntimeValue inx   the key
+   * @param RuntimeValue val   the Value
+   * @param AspSyntax    where  where the method was called
+   */
+  public void evalAssignElem(RuntimeValue inx, RuntimeValue val, AspSyntax where) {
+    if (inx instanceof RuntimeStringValue) {
+      //change this in part 4
+    }
+    runtimeError("Index must be an String", where);
   }
 
 }

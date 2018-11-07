@@ -11,11 +11,17 @@ public class RuntimeListValue extends RuntimeValue{
 		this.listvalue = list;
 	}
 
+	/**
+	 * returns the typename
+	 */
   @Override
   protected String typeName() {
     return "list";
   }
 
+	/*
+	 * returns the list as a string
+	 */
   @Override
   public String toString() {
     String tmp = "[";
@@ -28,6 +34,12 @@ public class RuntimeListValue extends RuntimeValue{
 		return tmp + "]";
   }
 
+	/**
+	 * returns the value of this[v]
+	 * @param  RuntimeValue v             the index
+	 * @param  AspSyntax    where         where the method was called
+	 * @return              RuntimeValue
+	 */
 	public RuntimeValue evalSubscription(RuntimeValue v, AspSyntax where){
 		if(v instanceof RuntimeIntValue){
 			if (v.getIntValue("index", where) > this.listvalue.size() || v.getIntValue("index", where) < 0){
@@ -40,10 +52,19 @@ public class RuntimeListValue extends RuntimeValue{
 		return null;
 	}
 
+	/*
+	 * returns the length of the list as a RuntimeIntValue
+	 */
 	public RuntimeValue evalLen(){
 		return new RuntimeIntValue(this.listvalue.size());
 	}
 
+	/**
+   * returns the value of this + v
+   * @param  RuntimeValue v             the value to be added
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeListValue
+   */
 	public RuntimeValue evalAdd(RuntimeValue v, AspSyntax where){
 		if(v instanceof RuntimeListValue){
 			RuntimeListValue r = (RuntimeListValue) v;
@@ -56,6 +77,12 @@ public class RuntimeListValue extends RuntimeValue{
 		return null;
 	}
 
+	/**
+   * returns the value of this * v
+   * @param  RuntimeValue v             the value to multiplied with
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeListValue
+   */
 	public RuntimeValue evalMultiply(RuntimeValue v, AspSyntax where){
 		RuntimeValue newlist = new RuntimeListValue(new ArrayList<RuntimeValue>());
 		for (int x = 0; x < v.getIntValue("mul", where) ; x++ ) {
@@ -64,6 +91,9 @@ public class RuntimeListValue extends RuntimeValue{
 		return newlist;
 	}
 
+	/*
+	 * returns the boolean value of the list
+	 */
 	public boolean getBoolValue(){
 		if( this.listvalue.size() > 0){
 			return false;
@@ -71,9 +101,13 @@ public class RuntimeListValue extends RuntimeValue{
 		return true;
 	}
 
+	@Override
+	public void evalAssignElem(RuntimeValue inx, RuntimeValue val, AspSyntax where) {
+		if (inx instanceof RuntimeIntValue) {
+			//change this in part 4
+		}
+	}
 
 }
-
-
 
 //eof

@@ -11,26 +11,47 @@ public class RuntimeIntValue extends RuntimeValue {
     intValue = v;
   }
 
+  /**
+   * retuns the value as a string
+   */
   @Override
   public String toString() {
     return Long.toString(intValue);
   }
 
+  /**
+   * returns the typename
+   */
   @Override
   protected String typeName() {
     return "integer";
   }
 
+  /**
+   * returns the intvalue
+   * @param  String    what          what called the method
+   * @param  AspSyntax where         where the method was called
+   * @return           [description]
+   */
   @Override
   public long getIntValue(String what, AspSyntax where) {
     return intValue;
   }
 
+  /*
+   * returns boolean value of the value
+   */
   @Override
   public boolean getBoolValue(String what, AspSyntax where) {
     return 0 != intValue;
   }
 
+  /**
+   * returns the value of this == v
+   * @param  RuntimeValue v             the value to compared to
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeBoolValue
+   */
   @Override
   public RuntimeValue evalEqual(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeNoneValue) {
@@ -49,6 +70,12 @@ public class RuntimeIntValue extends RuntimeValue {
     return null;  // Required by the compiler
   }
 
+  /**
+   * returns the value of this + v
+   * @param  RuntimeValue v             the value to be added
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeIntValue | RuntimeFloatValue
+   */
   public RuntimeValue evalAdd(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeFloatValue) {
       return new RuntimeFloatValue(v.getFloatValue("+ Operand", where) + intValue);
@@ -62,19 +89,31 @@ public class RuntimeIntValue extends RuntimeValue {
 	  return null;  // Required by the compiler!
   }
 
+  /**
+   * returns the value of this / v
+   * @param  RuntimeValue v             the value to be divided with
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeFloatValue
+   */
   public RuntimeValue evalDivide(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeFloatValue) {
       return new RuntimeFloatValue(intValue / v.getFloatValue("/ operand", where) );
     }
 
     else if (v instanceof RuntimeIntValue) {
-      return new RuntimeIntValue(intValue / v.getIntValue("/ operand", where));
+      return new RuntimeFloatValue((double) intValue / v.getIntValue("/ operand", where));
     }
 
     runtimeError("'/' undefined for "+typeName()+"!", where);
     return null;  // Required by the compiler!
   }
 
+  /**
+   * returns the value of this >= v
+   * @param  RuntimeValue v             the value to compared to
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeBoolValue
+   */
   @Override
   public RuntimeValue evalGreater(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeIntValue) {
@@ -89,6 +128,12 @@ public class RuntimeIntValue extends RuntimeValue {
     return null;  // Required by the compiler
   }
 
+  /**
+   * returns the value of this >= v
+   * @param  RuntimeValue v             the value to compared to
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeBoolValue
+   */
   @Override
   public RuntimeValue evalGreaterEqual(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeIntValue) {
@@ -103,6 +148,12 @@ public class RuntimeIntValue extends RuntimeValue {
     return null;  // Required by the compiler
   }
 
+  /**
+   * returns the value of this // v
+   * @param  RuntimeValue v             the value to  be divided by
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeFloatValue| RuntimeIntValue
+   */
   public RuntimeValue evalIntDivide(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeFloatValue) {
       return new RuntimeFloatValue(Math.floor(intValue / v.getFloatValue("// operand", where) ));
@@ -116,6 +167,12 @@ public class RuntimeIntValue extends RuntimeValue {
     return null;  // Required by the compiler!
   }
 
+  /**
+   * returns the value of this < v
+   * @param  RuntimeValue v             the value to compared to
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeBoolValue
+   */
   @Override
   public RuntimeValue evalLess(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeIntValue) {
@@ -130,6 +187,12 @@ public class RuntimeIntValue extends RuntimeValue {
     return null;  // Required by the compiler
   }
 
+  /**
+   * returns the value of this <= v
+   * @param  RuntimeValue v             the value to compared to
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeBoolValue
+   */
   @Override
   public RuntimeValue evalLessEqual(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeIntValue) {
@@ -144,6 +207,12 @@ public class RuntimeIntValue extends RuntimeValue {
     return null;  // Required by the compiler
   }
 
+  /**
+   * returns the value of this % v
+   * @param  RuntimeValue v             the value to modulad with
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeIntValue | RuntimeFloatValue
+   */
   public RuntimeValue evalModulo(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeFloatValue) {
       return new RuntimeFloatValue(intValue - v.getFloatValue("% operand",where) * Math.floor(intValue / v.getFloatValue("float", where) ));
@@ -157,6 +226,12 @@ public class RuntimeIntValue extends RuntimeValue {
     return null;  // Required by the compiler!
   }
 
+  /**
+   * returns the value of this * v
+   * @param  RuntimeValue v             the value to be multiplied with
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeBoolValue
+   */
   public RuntimeValue evalMultiply(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeFloatValue) {
       return new RuntimeFloatValue(v.getFloatValue("* operand", where) * intValue);
@@ -171,11 +246,19 @@ public class RuntimeIntValue extends RuntimeValue {
   }
 
 
-
+  /*
+   * returns the value of this * -1
+   */
   public RuntimeValue evalNegate(AspSyntax where) {
     return new RuntimeIntValue(intValue * -1);
   }
 
+  /**
+   * returns the value of this != v
+   * @param  RuntimeValue v             the value to compared to
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeBoolValue
+   */
   @Override
   public RuntimeValue evalNotEqual(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeNoneValue) {
@@ -194,14 +277,28 @@ public class RuntimeIntValue extends RuntimeValue {
     return null;  // Required by the compiler
   }
 
+  /**
+   * returns the value of not this
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeBoolValue
+   */
   public RuntimeValue evalNot(AspSyntax where) {
 	  return new RuntimeBoolValue(0 == intValue);
   }
 
+  /*
+   * returns the value of this * 1
+   */
   public RuntimeValue evalPositive(AspSyntax where) {
     return new RuntimeIntValue(intValue);
   }
 
+  /**
+   * returns the value of this - v
+   * @param  RuntimeValue v             the value to be subtracted
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeBoolValue
+   */
   public RuntimeValue evalSubtract(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeFloatValue) {
       return new RuntimeFloatValue(intValue - v.getFloatValue("- operand", where));

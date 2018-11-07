@@ -10,23 +10,41 @@ public class RuntimeStringValue extends RuntimeValue {
     value = v;
   }
 
+  /*
+   * reutns the value as a string
+   */
   public String toString(){
     return "'"  + value + "'";
   }
 
+  /*
+   * returns the typename
+   */
   public String typeName() {
     return "String";
   }
 
+  /*
+   * retursn the string value
+   */
   public String getStringValue(String what, AspSyntax where) {
     return value;
   }
 
+  /*
+   * returns the boolean value of the value
+   */
   public boolean getBoolValue(String what, AspSyntax where) {
     return !(value.equals(""));
   }
 
 
+  /**
+   * returns the value of this + v
+   * @param  RuntimeValue v             the value to be added
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeStringValue
+   */
   public RuntimeValue evalAdd(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeStringValue) {
       return new RuntimeStringValue(value + v.getStringValue("+ operand ", where));
@@ -36,6 +54,12 @@ public class RuntimeStringValue extends RuntimeValue {
     return null;
   }
 
+  /**
+   * returns the value of this == v
+   * @param  RuntimeValue v             the value to compared to
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeBoolValue
+   */
   @Override
   public RuntimeValue evalEqual(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeNoneValue) {
@@ -50,6 +74,12 @@ public class RuntimeStringValue extends RuntimeValue {
     return null;  // Required by the compiler
   }
 
+  /**
+   * returns the value of this < v
+   * @param  RuntimeValue v             the value to compared to
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeBoolValue
+   */
   @Override
   public RuntimeValue evalGreater(RuntimeValue v, AspSyntax where) {
 
@@ -57,10 +87,16 @@ public class RuntimeStringValue extends RuntimeValue {
       return new RuntimeBoolValue(value.compareTo(v.getStringValue("< operand", where)) > 0 );
     }
 
-    runtimeError("Type error for <.", where);
+    runtimeError("Type error for >.", where);
     return null;  // Required by the compiler
   }
 
+  /**
+   * returns the value of this >= v
+   * @param  RuntimeValue v             the value to compared to
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeBoolValue
+   */
   @Override
   public RuntimeValue evalGreaterEqual(RuntimeValue v, AspSyntax where) {
 
@@ -68,14 +104,23 @@ public class RuntimeStringValue extends RuntimeValue {
       return new RuntimeBoolValue(value.compareTo(v.getStringValue("<= operand", where)) >= 0 );
     }
 
-    runtimeError("Type error for <=.", where);
+    runtimeError("Type error for >=.", where);
     return null;  // Required by the compiler
   }
 
+  /*
+   * returns the length of the string as a RuntimeIntValue
+   */
   public RuntimeValue evalLen(RuntimeValue v, AspSyntax where) {
     return new RuntimeIntValue(value.length());
   }
 
+  /**
+   * returns the value of this < v
+   * @param  RuntimeValue v             the value to compared to
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeBoolValue
+   */
   @Override
   public RuntimeValue evalLess(RuntimeValue v, AspSyntax where) {
 
@@ -83,10 +128,16 @@ public class RuntimeStringValue extends RuntimeValue {
       return new RuntimeBoolValue(value.compareTo(v.getStringValue("> operand", where)) < 0 );
     }
 
-    runtimeError("Type error for >.", where);
+    runtimeError("Type error for <.", where);
     return null;  // Required by the compiler
   }
 
+  /**
+   * returns the value of this <= v
+   * @param  RuntimeValue v             the value to compared to
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeBoolValue
+   */
   @Override
   public RuntimeValue evalLessEqual(RuntimeValue v, AspSyntax where) {
 
@@ -94,10 +145,16 @@ public class RuntimeStringValue extends RuntimeValue {
       return new RuntimeBoolValue(value.compareTo(v.getStringValue(">= operand", where)) <= 0 );
     }
 
-    runtimeError("Type error for >=.", where);
+    runtimeError("Type error for <=.", where);
     return null;  // Required by the compiler
   }
 
+  /**
+   * returns the value of this * v
+   * @param  RuntimeValue v             the value to multiplied with
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeBoolValue
+   */
   public RuntimeValue evalMultiply(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeIntValue) {
       String ret = "";
@@ -111,10 +168,19 @@ public class RuntimeStringValue extends RuntimeValue {
     return null;
   }
 
+/*
+ * returns the value of not this
+ */
   public RuntimeValue evalNot(RuntimeValue v, AspSyntax where) {
     return new RuntimeBoolValue(value.equals(""));
   }
 
+  /**
+   * returns the value of this != v
+   * @param  RuntimeValue v             the value to compared to
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeBoolValue
+   */
   @Override
   public RuntimeValue evalNotEqual(RuntimeValue v, AspSyntax where) {
     if (v instanceof RuntimeNoneValue) {
@@ -129,6 +195,12 @@ public class RuntimeStringValue extends RuntimeValue {
     return null;  // Required by the compiler
   }
 
+  /**
+   * returns the value of this[v]
+   * @param  RuntimeValue v             the value of the index
+   * @param  AspSyntax    where         where the method was called
+   * @return              RuntimeStringValue
+   */
   public RuntimeValue evalSubscription(RuntimeValue v, AspSyntax where) {
 	  if (v instanceof RuntimeIntValue) {
       if (0 <= v.getIntValue("index", where) && v.getIntValue("index", where)  < value.length()) {
