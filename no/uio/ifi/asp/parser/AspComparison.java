@@ -125,7 +125,7 @@ class AspComparison extends AspSyntax {
           break;
         }
 
-        case equalToken: {
+        case doubleEqualToken: {
           if (!v.evalEqual(terms.get(i).eval(curScope), this).getBoolValue("compOpr",this)) {
             return new RuntimeBoolValue(false);
           }
