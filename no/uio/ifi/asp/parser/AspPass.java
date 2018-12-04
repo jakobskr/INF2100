@@ -36,6 +36,7 @@ public class AspPass extends AspStmt {
   }
 
     RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-    return null;
+        trace("pass");
+        return null;
   }
 }

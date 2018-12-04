@@ -53,6 +53,7 @@ public class AspExprStmt extends AspStmt {
    * @throws RuntimeReturnValue -
    */
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+    trace("expr stmt");
     return expr.eval(curScope);
   }
 }
