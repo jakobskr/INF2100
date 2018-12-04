@@ -47,6 +47,9 @@ public class AspProgram extends AspSyntax {
 
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     //-- Must be changed in part 4:
+    for (AspStmt stmt: stmts) {
+      stmt.eval(curScope);
+    }
     return null;
   }
 }

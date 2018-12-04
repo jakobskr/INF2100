@@ -22,7 +22,7 @@ public class RuntimeScope {
 
 
     public void assign(String id, RuntimeValue val) {
-	decls.put(id, val);
+		decls.put(id, val);
     }
 
 
