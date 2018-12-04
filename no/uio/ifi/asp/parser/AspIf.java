@@ -58,12 +58,14 @@ class AspIf extends AspStmt {
 		int i = 0;
 		while (i<exps.size()){
 			if(exps.get(i).eval(curScope).getBoolValue("if", this)){
-				sut.get(i).eval(curScope);
+				trace("if True alt #" + (i + 1));
+        sut.get(i).eval(curScope);
 				return null;
 			}
 			i++;
 		}
 		if(elsut != null){
+      trace("else: ...");
 			elsut.eval(curScope);
 		}
     return null;
