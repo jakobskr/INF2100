@@ -51,9 +51,17 @@ class AspFor extends AspStmt{
   }
 
 	RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-		for(AspExpr e: exp ){
-			curScope.assign(name, exp.eval(curScope));
-			sut.eval(curScope);
+		RuntimeValue temp = exp.eval(curScope);
+		if (temp instanceof RuntimeListValue) {
+			RuntimeListValue list = (RuntimeListValue) temp;			
+			RuntimeValue ret = null;
+			for (RuntimeValue r: list.listvalue) {
+				curScope.assign(name.name, r);
+			}
+		}
+
+		else {
+			RuntimeValue.runtimeError("for loop range is not a list", this);
 		}
 		return null;
 	}

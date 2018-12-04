@@ -5,7 +5,7 @@ import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.parser.AspSyntax;
 
 public class RuntimeListValue extends RuntimeValue{
-	ArrayList<RuntimeValue> listvalue;
+	public ArrayList<RuntimeValue> listvalue;
 
 	public RuntimeListValue(ArrayList<RuntimeValue> list){
 		this.listvalue = list;
