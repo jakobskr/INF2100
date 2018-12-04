@@ -40,7 +40,7 @@ public class AspName extends AspAtom {
   }
 
 	RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-    return null;
+    return curScope.find(name,this);
   }
 
 

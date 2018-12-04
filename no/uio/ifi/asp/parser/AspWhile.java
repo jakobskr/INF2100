@@ -46,8 +46,14 @@ class AspWhile extends AspStmt{
   }
 
 	public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+		while(exp.eval(curScope).getBoolValue("while", this) == true) {
+			trace("while true:");
+			sut.eval(curScope);
+		}
+		trace("while false:");
 		return null;
 	}
+
 }
 
 
