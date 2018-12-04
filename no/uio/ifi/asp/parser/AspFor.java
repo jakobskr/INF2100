@@ -51,6 +51,10 @@ class AspFor extends AspStmt{
   }
 
 	RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+		for(AspExpr e: exp ){
+			curScope.assign(name, exp.eval(curScope));
+			sut.eval(curScope);
+		}
 		return null;
 	}
 }
