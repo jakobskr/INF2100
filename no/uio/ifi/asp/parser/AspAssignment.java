@@ -47,7 +47,7 @@ class AspAssignment extends AspStmt {
 	}
 
 	RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-		curscope.assign(name, exp.eval(curScope));
+		curScope.assign(name.name, exp.eval(curScope));
 		return null;
 	}
 

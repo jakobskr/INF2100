@@ -55,6 +55,17 @@ class AspIf extends AspStmt {
 
 
   RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+		int i = 0;
+		while (i<exps.size()){
+			if(exps.get(i).eval(curScope).getBoolValue("if", this)){
+				sut.get(i).eval(curScope);
+				return null;
+			}
+			i++;
+		}
+		if(elsut != null){
+			elsut.eval(curScope);
+		}
     return null;
   }
 
