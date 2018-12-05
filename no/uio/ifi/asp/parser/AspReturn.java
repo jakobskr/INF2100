@@ -43,7 +43,11 @@ public class AspReturn extends AspStmt {
 
   // @Override
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-    //-- Must be changed in part 3:
-    return null;
+    if( expr == null){
+			throw new RuntimeReturnValue(new RuntimeNoneValue(), lineNum);
+		}
+		RuntimeValue val = expr.eval(curScope);
+		RuntimeReturnValue ret = new RuntimeReturnValue(val, lineNum);
+		throw ret;
   }
 }
