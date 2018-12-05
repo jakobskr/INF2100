@@ -64,6 +64,17 @@ public class RuntimeLibrary extends RuntimeScope {
     	});
 
 			//range
+			assign("range", new RuntimeFunc("range") {
+				@Override
+				public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
+					ArrayList<RuntimeValue> val = new ArrayList<RuntimeValue>();
+					int p = (int) actualParams.get(1).getIntValue("int", where);
+					for(int i = (int) actualParams.get(0).getIntValue("int", where); i < p; i++){
+						val.add(new RuntimeIntValue(i));
+					}
+					return new RuntimeListValue(val);
+				}
+			});
 
 
     }
