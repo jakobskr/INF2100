@@ -112,10 +112,8 @@ public class Main {
 
     RuntimeScope lib = new RuntimeLibrary();
     RuntimeScope globals = new RuntimeScope(lib);
-    System.out.println("awooo");
     try {
       prog.eval(globals);
-      System.out.println("awo");
     } catch (RuntimeReturnValue rrv) {
       panic("Uncaught return exception!");
     }

@@ -28,6 +28,10 @@ public class RuntimeFunc extends RuntimeValue {
 		this.name = name;
 	}
 
+	public String toString() {
+		return name;
+	}
+
 	protected String typeName() {
 		return "Function";
 	}
