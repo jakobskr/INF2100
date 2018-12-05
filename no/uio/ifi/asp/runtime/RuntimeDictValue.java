@@ -88,9 +88,16 @@ public class RuntimeDictValue extends RuntimeValue {
    */
   public void evalAssignElem(RuntimeValue inx, RuntimeValue val, AspSyntax where) {
     if (inx instanceof RuntimeStringValue) {
-      //change this in part 4
+      String index = inx.getStringValue("assignElem", where);
+      if (dict.containsKey(index)) {
+        dict.replace(index,val);
+        return;        
+      }
+      runtimeError("key not in the dictonaries",where);
+      return;
     }
     runtimeError("Index must be an String", where);
+    return;
   }
 
 }
