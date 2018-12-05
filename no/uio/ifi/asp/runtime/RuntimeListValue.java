@@ -104,8 +104,17 @@ public class RuntimeListValue extends RuntimeValue{
 	@Override
 	public void evalAssignElem(RuntimeValue inx, RuntimeValue val, AspSyntax where) {
 		if (inx instanceof RuntimeIntValue) {
-			//change this in part 4
+			int index = (int) inx.getIntValue("assign elem", where);
+			if (0 < index && index < listvalue.size()) {
+				listvalue.set(index, val);
+				return;
+			}
+			runtimeError("list index oud of bounds", where);
+			return;
 		}
+		runtimeError("list index is not an int", where);  
+		return;
+
 	}
 
 }
