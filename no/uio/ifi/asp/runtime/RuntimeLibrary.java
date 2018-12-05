@@ -10,7 +10,26 @@ public class RuntimeLibrary extends RuntimeScope {
     private Scanner keyboard = new Scanner(System.in);
 
     public RuntimeLibrary() {
-	//-- Must be changed in part 4:
+    	//len
+    	assign("len", new RuntimeFunc("func") {
+    		@Override
+    		public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
+    			checkNumParams(actualParams, 1, "len", where);
+    			System.out.println(actualParams.get(0).evalLen(where));
+    			return actualParams.get(0).evalLen(where);
+    	}});
+
+    	//print
+    	assign("print", new RuntimeFunc("print") {
+    		@Override
+    		public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
+    			for (RuntimeValue val: actualParams) {
+    				System.out.print(val);
+    			}
+    			System.out.print("\n");
+    			return null;
+    		}
+    	});
     }
 
 

@@ -24,11 +24,15 @@ public class RuntimeFunc extends RuntimeValue {
 
 	}
 
+	public RuntimeFunc(String name) {
+		this.name = name;
+	}
+
 	protected String typeName() {
 		return "Function";
 	}
 
-	public RuntimeValue eval (ArrayList<RuntimeValue> actualParams, AspSyntax where){
+	public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where){
 		try{
 			RuntimeScope newScope = new RuntimeScope();
 			for (int i = 0; i < parameters.size(); i++){

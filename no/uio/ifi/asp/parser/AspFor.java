@@ -57,7 +57,7 @@ class AspFor extends AspStmt{
 			RuntimeListValue list = (RuntimeListValue) temp;			
 			RuntimeValue ret = null;
 			for (RuntimeValue r: list.listvalue) {
-				trace("for " + i + "#: " + name.name + " = " + r.toString());
+				trace("for #" + i + ": " + name.name + " = " + r.toString());
 
 				curScope.assign(name.name, r);
 				sut.eval(curScope);
