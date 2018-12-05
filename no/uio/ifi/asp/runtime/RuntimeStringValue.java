@@ -14,7 +14,7 @@ public class RuntimeStringValue extends RuntimeValue {
    * reutns the value as a string
    */
   public String toString(){
-    return "'"  + value + "'";
+    return value;
   }
 
   /*
