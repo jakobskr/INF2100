@@ -70,6 +70,17 @@ class AspPrimary extends AspSyntax {
 			if(prim instanceof AspSubscription){
 				v = v.evalSubscription(prim.eval(curScope),this);
 			}
+			if (prim instanceof AspArguments) {
+				AspArguments args = (AspArguments) prim;
+				ArrayList<RuntimeValue> vals = new ArrayList<RuntimeValue>();
+				
+				for (AspExpr exp : args.exps) {
+					vals.add(exp.eval(curScope));	
+				}
+
+				v = v.evalFuncCall(vals, this);
+				System.out.println(v);
+			}
 		}
 
 		return v;
