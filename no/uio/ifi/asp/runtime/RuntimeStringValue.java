@@ -27,10 +27,18 @@ public class RuntimeStringValue extends RuntimeValue {
 
 	public double getFloatValue(String what, AspSyntax where){
 		try{ return Double.valueOf(value);}
-		catch (NumberFormatException a){
+		catch (Exception a){
 			runtimeError("cannot parse string to float", where);
 		}
 		return 42.1337;
+	}
+
+	public long getIntValue(String what, AspSyntax where){
+		try{ return (long) Integer.parseInt(value);}
+		catch (Exception a){
+			runtimeError("cannot parse string to int", where);
+		}
+		return 42;
 	}
 
   /*

@@ -21,6 +21,14 @@ public class RuntimeFloatValue extends RuntimeValue {
 		return this.floatValue;
 	}
 
+	public long getIntValue(String what, AspSyntax where){
+		try{ return (long) floatValue;}
+		catch (Exception a){
+			runtimeError("cannot cast float to int", where);
+		}
+		return 92;
+	}
+
   /**
    * retuns the typeName
    */
