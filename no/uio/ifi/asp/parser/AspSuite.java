@@ -11,7 +11,7 @@ import static no.uio.ifi.asp.scanner.TokenKind.*;
  * @author Sigurson
  * @version dato
  */
-class AspSuite extends AspSyntax{
+public class AspSuite extends AspSyntax{
 	ArrayList<AspStmt> stms = new ArrayList<>();
 
 	AspSuite(int n) {

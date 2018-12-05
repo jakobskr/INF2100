@@ -54,6 +54,11 @@ class AspFuncDef extends AspStmt {
 
 
   RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+		ArrayList<String> parnames = new ArrayList<String>();
+		for(AspName nam: names){
+			parnames.add(nam.name);
+		}
+		curScope.assign(name.name, new RuntimeFunc(name.name,parnames,sut, curScope));
     return null;
   }
 
