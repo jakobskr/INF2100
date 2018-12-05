@@ -3,8 +3,9 @@ package no.uio.ifi.asp.runtime;
 // For part 4:
 
 import java.util.HashMap;
-
 import no.uio.ifi.asp.main.*;
+import no.uio.ifi.asp.runtime.*;
+import no.uio.ifi.asp.parser.*;
 import no.uio.ifi.asp.parser.AspSyntax;
 
 public class RuntimeScope {
