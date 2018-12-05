@@ -1,5 +1,6 @@
 package no.uio.ifi.asp.runtime;
 
+import java.lang.NumberFormatException;
 import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.parser.AspSyntax;
 
@@ -23,6 +24,14 @@ public class RuntimeStringValue extends RuntimeValue {
   public String typeName() {
     return "String";
   }
+
+	public double getFloatValue(String what, AspSyntax where){
+		try{ return Double.valueOf(value);}
+		catch (NumberFormatException a){
+			runtimeError("cannot parse string to float", where);
+		}
+		return 42.1337;
+	}
 
   /*
    * retursn the string value
