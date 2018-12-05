@@ -51,7 +51,7 @@ public class RuntimeLibrary extends RuntimeScope {
     	assign("str", new RuntimeFunc("String") {
     		@Override
     		public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
-    			return new RuntimeStringValue(actualParams.get(0).getStringValue("String", where));
+    			return new RuntimeStringValue(actualParams.get(0).toString());
     		}
     	});
 
