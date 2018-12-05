@@ -27,13 +27,49 @@ public class RuntimeLibrary extends RuntimeScope {
     				System.out.print(val);
     			}
     			System.out.print("\n");
-    			return null;
+    			return new RuntimeNoneValue();
     		}
     	});
+
+			//int
+    	assign("int", new RuntimeFunc("int") {
+    		@Override
+    		public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
+    			return new RuntimeIntValue(actualParams.get(0).getIntValue("int", where));
+    		}
+    	});
+
+			//float
+    	assign("float", new RuntimeFunc("float") {
+    		@Override
+    		public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
+    			return new RuntimeFloatValue(actualParams.get(0).getFloatValue("float", where));
+    		}
+    	});
+
+			//string
+    	assign("str", new RuntimeFunc("String") {
+    		@Override
+    		public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
+    			return new RuntimeStringValue(actualParams.get(0).getStringValue("String", where));
+    		}
+    	});
+
+			//input
+    	assign("input", new RuntimeFunc("input") {
+    		@Override
+    		public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
+    			return new RuntimeStringValue(keyboard.nextLine());
+    		}
+    	});
+
+			//range
+
+
     }
 
 
-    private void checkNumParams(ArrayList<RuntimeValue> actArgs, 
+    private void checkNumParams(ArrayList<RuntimeValue> actArgs,
 				int nCorrect, String id, AspSyntax where) {
 	if (actArgs.size() != nCorrect)
 	    RuntimeValue.runtimeError("Wrong number of parameters to "+id+"!",where);
