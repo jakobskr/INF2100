@@ -37,9 +37,9 @@ public class RuntimeFunc extends RuntimeValue {
 	}
 
 	public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where){
-		
+
 		try{
-			RuntimeScope newScope = new RuntimeScope();
+			RuntimeScope newScope = new RuntimeScope(curScope);
 			for (int i = 0; i < parameters.size(); i++){
 				newScope.assign(parameters.get(i), actualParams.get(i));
 			}
