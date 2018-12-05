@@ -55,7 +55,7 @@ public class RuntimeListValue extends RuntimeValue{
 	/*
 	 * returns the length of the list as a RuntimeIntValue
 	 */
-	public RuntimeValue evalLen(){
+	public RuntimeValue evalLen(AspSyntax where){
 		return new RuntimeIntValue(this.listvalue.size());
 	}
 
@@ -105,7 +105,7 @@ public class RuntimeListValue extends RuntimeValue{
 	public void evalAssignElem(RuntimeValue inx, RuntimeValue val, AspSyntax where) {
 		if (inx instanceof RuntimeIntValue) {
 			int index = (int) inx.getIntValue("assign elem", where);
-			if (0 < index && index < listvalue.size()) {
+			if (0 <= index && index < listvalue.size()) {
 				listvalue.set(index, val);
 				return;
 			}

@@ -55,6 +55,7 @@ class AspFuncDef extends AspStmt {
 
   RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
 		ArrayList<String> parnames = new ArrayList<String>();
+		trace("func def for " + name.name);
 		for(AspName nam: names){
 			parnames.add(nam.name);
 		}

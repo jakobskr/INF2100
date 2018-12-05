@@ -35,6 +35,7 @@ public class RuntimeLibrary extends RuntimeScope {
     	assign("int", new RuntimeFunc("int") {
     		@Override
     		public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
+    			checkNumParams(actualParams, 1, "int", where);
     			return new RuntimeIntValue(actualParams.get(0).getIntValue("int", where));
     		}
     	});
@@ -43,6 +44,7 @@ public class RuntimeLibrary extends RuntimeScope {
     	assign("float", new RuntimeFunc("float") {
     		@Override
     		public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
+    			checkNumParams(actualParams, 1 , "float", where);
     			return new RuntimeFloatValue(actualParams.get(0).getFloatValue("float", where));
     		}
     	});
@@ -51,6 +53,7 @@ public class RuntimeLibrary extends RuntimeScope {
     	assign("str", new RuntimeFunc("String") {
     		@Override
     		public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
+    			checkNumParams(actualParams, 1, "str", where);
     			return new RuntimeStringValue(actualParams.get(0).toString());
     		}
     	});
@@ -58,15 +61,19 @@ public class RuntimeLibrary extends RuntimeScope {
 			//input
     	assign("input", new RuntimeFunc("input") {
     		@Override
-    		public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
-    			return new RuntimeStringValue(keyboard.nextLine());
+    		public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {		
+	    		checkNumParams(actualParams, 1, "input", where);
+	    		System.out.print(actualParams.get(0));
+	    		RuntimeStringValue val = new RuntimeStringValue(keyboard.nextLine());
+	    		return val;
     		}
     	});
 
-			//range
+			//range 
 			assign("range", new RuntimeFunc("range") {
 				@Override
 				public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
+					checkNumParams(actualParams, 2, "str", where);
 					ArrayList<RuntimeValue> val = new ArrayList<RuntimeValue>();
 					int p = (int) actualParams.get(1).getIntValue("int", where);
 					for(int i = (int) actualParams.get(0).getIntValue("int", where); i < p; i++){
