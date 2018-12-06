@@ -38,7 +38,7 @@ public class RuntimeDictValue extends RuntimeValue {
       if (c > 0) {
         ret += ", ";
       }
-      ret += "'" + key + "'" + ": " + dict.get(key).toString();
+      ret += "'" + key + "'" + ": " + dict.get(key).showInfo();
       c++;
     }
     return ret += "}";
@@ -91,7 +91,7 @@ public class RuntimeDictValue extends RuntimeValue {
       String index = inx.getStringValue("assignElem", where);
       if (dict.containsKey(index)) {
         dict.replace(index,val);
-        return;        
+        return;
       }
       runtimeError("key not in the dictonaries",where);
       return;

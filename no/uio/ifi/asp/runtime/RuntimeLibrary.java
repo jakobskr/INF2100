@@ -50,7 +50,7 @@ public class RuntimeLibrary extends RuntimeScope {
     	});
 
 			//string
-    	assign("str", new RuntimeFunc("String") {
+    	assign("str", new RuntimeFunc("str") {
     		@Override
     		public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
     			checkNumParams(actualParams, 1, "str", where);
@@ -61,7 +61,7 @@ public class RuntimeLibrary extends RuntimeScope {
 			//input
     	assign("input", new RuntimeFunc("input") {
     		@Override
-    		public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {		
+    		public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
 	    		checkNumParams(actualParams, 1, "input", where);
 	    		System.out.print(actualParams.get(0));
 	    		RuntimeStringValue val = new RuntimeStringValue(keyboard.nextLine());
@@ -69,7 +69,7 @@ public class RuntimeLibrary extends RuntimeScope {
     		}
     	});
 
-			//range 
+			//range
 			assign("range", new RuntimeFunc("range") {
 				@Override
 				public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {

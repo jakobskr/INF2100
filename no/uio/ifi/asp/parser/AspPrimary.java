@@ -71,22 +71,25 @@ class AspPrimary extends AspSyntax {
 				v = v.evalSubscription(prim.eval(curScope),this);
 			}
 			if (prim instanceof AspArguments) {
-
-				String traceStr = "call function " + v.toString() + " with params [";
+				StringBuilder traceBld = new StringBuilder("Call function ");
+				traceBld.append( v.showInfo()); traceBld.append(" with params [");
 				AspArguments args = (AspArguments) prim;
 				ArrayList<RuntimeValue> vals = new ArrayList<RuntimeValue>();
-				
+				int len = args.exps.size();
+				int i = 1;
 				for (AspExpr exp : args.exps) {
 					RuntimeValue temp_val = exp.eval(curScope);
 					vals.add(temp_val);
-					traceStr = traceStr + temp_val.toString() + ",";
+					if (i != len) {
+						traceBld.append(temp_val.showInfo()); traceBld.append(", ");
+					}
+					else {
+						traceBld.append(temp_val.showInfo());
+					}
+					i++;
 				}
-				int index = traceStr.lastIndexOf(',');
-				if(index != -1) {
-    				traceStr = traceStr.substring(0,index);
-				}
-				traceStr = traceStr + "] as arguments";
-				trace(traceStr);
+				traceBld.append("]");
+				trace(traceBld.toString());
 				v = v.evalFuncCall(vals, this);
 			}
 		}

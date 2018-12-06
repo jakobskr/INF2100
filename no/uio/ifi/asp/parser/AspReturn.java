@@ -47,7 +47,7 @@ public class AspReturn extends AspStmt {
 			throw new RuntimeReturnValue(new RuntimeNoneValue(), lineNum);
 		}
 		RuntimeValue val = expr.eval(curScope);
-    trace("return " + val.toString());
+    trace("return " + val.showInfo());
 		RuntimeReturnValue ret = new RuntimeReturnValue(val, lineNum);
 		throw ret;
   }

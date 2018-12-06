@@ -7,7 +7,7 @@ import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 public class Main {
-  public static final String version = "2018-10-19";
+  public static final String version = "2018-12-06";
   public static final String authors = "Jakobskr/Sigurson";
   public static LogFile log = null;
 

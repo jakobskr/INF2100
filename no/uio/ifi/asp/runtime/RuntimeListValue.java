@@ -28,7 +28,7 @@ public class RuntimeListValue extends RuntimeValue{
 		int ct = 0;
 		for(RuntimeValue val: listvalue){
 			if(ct > 0){tmp = tmp + ", ";}
-			tmp = tmp + val.toString();
+			tmp = tmp + val.showInfo();
 			ct ++;
 		}
 		return tmp + "]";
@@ -112,7 +112,7 @@ public class RuntimeListValue extends RuntimeValue{
 			runtimeError("list index oud of bounds", where);
 			return;
 		}
-		runtimeError("list index is not an int", where);  
+		runtimeError("list index is not an int", where);
 		return;
 
 	}

@@ -57,25 +57,25 @@ class AspAssignment extends AspStmt {
 			for (i = 0; i < subs.size() - 1; i++ ) {
 
 				val = val.evalSubscription(subs.get(i).eval(curScope), this);
-				traceStr = traceStr + "[" + val.toString() + "]"; 
+				traceStr = traceStr + "[" + val.showInfo() + "]"; 
 			}
-			RuntimeValue temp_val = subs.get(i).eval(curScope); 
-			traceStr = traceStr + "[" + temp_val.toString() + "]";
+			RuntimeValue temp_val = subs.get(i).eval(curScope);
+			traceStr = traceStr + "[" + temp_val.showInfo() + "]";
 			RuntimeValue temp_val2 = exp.eval(curScope);
-			
+
 			val.evalAssignElem(temp_val, temp_val2, this);
-			traceStr = traceStr + " = " + temp_val2.toString();
-			trace(traceStr); 
+			traceStr = traceStr + " = " + temp_val2.showInfo();
+			trace(traceStr);
 			return null;
 		}
 
 		else {
 			RuntimeValue temp_val = exp.eval(curScope);
-			trace(name.name + " = " +  temp_val.toString());
+			trace(name.name + " = " +  temp_val.showInfo());
 			curScope.assign(name.name, temp_val);
 			return null;
 		}
-		
+
 	}
 
 	/**

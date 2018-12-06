@@ -54,7 +54,7 @@ public class AspExprStmt extends AspStmt {
    */
   public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
     RuntimeValue ret = expr.eval(curScope);
-    trace(ret.toString());
+    trace(ret.showInfo());
     return ret;
   }
 }
