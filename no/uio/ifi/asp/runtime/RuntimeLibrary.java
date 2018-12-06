@@ -83,6 +83,15 @@ public class RuntimeLibrary extends RuntimeScope {
 				}
 			});
 
+      //rand
+      assign("rand", new RuntimeFunc("rand") {
+        @Override
+        public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
+          checkNumParams(actualParams, 0, "rand", where);
+          return new RuntimeIntValue(4);
+        }}
+      );
+
 
     }
 
